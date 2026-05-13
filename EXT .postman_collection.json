@@ -1,0 +1,2644 @@
+{
+	"info": {
+		"_postman_id": "0c5800a6-79be-4158-b9f1-24fb2bc37fa6",
+		"name": "EXT ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TYK",
+			"item": [
+				{
+					"name": "1. Заявка на создание Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"// rкароче нашел на стаковерфлоу , делает функцию с Н количеством цифр которую потом переиспользую дальше",
+									"function randomDigits(len) {",
+									"    let s = \"\";",
+									"    for (let i = 0; i < len; i++) s += Math.floor(Math.random() * 10);",
+									"    return s;",
+									"}",
+									"",
+									"// Рандомная дата рождения 1940–2004",
+									"function randomBirthday() {",
+									"    const start = new Date(1940, 0, 1);",
+									"    const end = new Date(2004, 11, 31);",
+									"    const ts = start.getTime() + Math.random() * (end.getTime() - start.getTime());",
+									"    const d = new Date(ts);",
+									"    return d.toISOString().split(\"T\")[0];",
+									"}",
+									"",
+									"// фио мутим, можно наливать имена и тд в массивы",
+									"const firstNames = [",
+									"    \"Иванов\",\"Петров\",\"Сидоров\",\"Смирнов\",\"Кузнецов\",\"Попов\",\"Соколов\",\"Лебедев\",\"Козлов\",\"Новиков\",",
+									"\"Морозов\",\"Ершов\",\"Федоров\",\"Волков\",\"Алексеев\",\"Орлов\",\"Макаров\",\"Захаров\",\"Андреев\",\"Сергеев\",",
+									"\"Григорьев\",\"Романов\",\"Яковлев\",\"Гаврилов\",\"Власов\",\"Калинин\",\"Герасимов\",\"Ковалёв\",\"Ефимов\",\"Дмитриев\",",
+									"\"Беляев\",\"Комаров\",\"Шестаков\",\"Жуков\",\"Баранов\",\"Тарасов\",\"Беликов\",\"Соловьёв\",\"Карпов\",\"Воробьёв\",",
+									"\"Фролов\",\"Логинов\",\"Соболев\",\"Виноградов\",\"Борисов\",\"Журавлёв\",\"Ковалев\",\"Павлов\",\"Семенов\",\"Антонов\",",
+									"\"Тимофеев\",\"Никитин\",\"Агафонов\",\"Данилов\",\"Лебедев\",\"Прохоров\",\"Наумов\",\"Фомин\",\"Гусев\",\"Чернов\",",
+									"\"Мельников\",\"Родионов\",\"Котов\",\"Куликов\",\"Шилов\",\"Юдин\",\"Сазонов\",\"Терентьев\",\"Зиновьев\",\"Устинов\",",
+									"\"Федосеев\",\"Паньков\",\"Кудрявцев\",\"Бушуев\",\"Суханов\",\"Мухин\",\"Елисеев\",\"Крюков\",\"Богданов\",\"Суворов\",",
+									"\"Игнатьев\",\"Лапин\",\"Белоусов\",\"Киселев\",\"Крылов\",\"Артамонов\",\"Шарапов\",\"Фадеев\",\"Грачев\",\"Архипов\",",
+									"\"Горбачёв\",\"Щербаков\",\"Анисимов\",\"Емельянов\",\"Горбунов\",\"Курочкин\"",
+									"];",
+									"",
+									"const lastNames = [",
+									"    \"Александр\",\"Михаил\",\"Дмитрий\",\"Сергей\",\"Андрей\",\"Алексей\",\"Иван\",\"Максим\",\"Егор\",\"Кирилл\",",
+									"\"Матвей\",\"Ярослав\",\"Никита\",\"Роман\",\"Тимофей\",\"Владимир\",\"Павел\",\"Виктор\",\"Олег\",\"Илья\",",
+									"\"Степан\",\"Леонид\",\"Георгий\",\"Фёдор\",\"Юрий\",\"Глеб\",\"Артём\",\"Константин\",\"Евгений\",\"Виталий\",",
+									"\"Арсений\",\"Даниил\",\"Руслан\",\"Борис\",\"Станислав\",\"Григорий\",\"Валерий\",\"Тарас\",\"Игнат\",\"Платон\",",
+									"\"Прохор\",\"Савва\",\"Филипп\",\"Лука\",\"Маргарит\",\"Семён\",\"Вениамин\",\"Эдуард\",\"Лев\",\"Демьян\",",
+									"\"Анатолий\",\"Вадим\",\"Елисей\",\"Тихон\",\"Силантий\",\"Мирон\",\"Тимур\",\"Амир\",\"Гавриил\",\"Захар\",",
+									"\"Ильдар\",\"Макар\",\"Герман\",\"Артур\",\"Святослав\",\"Серафим\",\"Остап\",\"Еремей\",\"Корней\",\"Ефрем\",",
+									"\"Родион\",\"Юлиан\",\"Милан\",\"Рустам\",\"Адель\",\"Азамат\",\"Самир\",\"Марат\",\"Рафаэль\",\"Эмиль\",",
+									"\"Ален\",\"Варлам\",\"Ростислав\",\"Евстигней\",\"Ратмир\",\"Добрыня\",\"Богдан\",\"Велимир\",\"Всеволод\",\"Светозар\",",
+									"\"Ян\",\"Тамерлан\",\"Эльдар\",\"Софрон\",\"Аким\",\"Назар\"",
+									"];",
+									"",
+									"const middleNames = [",
+									"    \"Александрович\",\"Михайлович\",\"Дмитриевич\",\"Сергеевич\",\"Алексеевич\",\"Иванович\",\"Андреевич\",\"Егорович\",\"Кириллович\",\"Максимович\",",
+									"\"Романович\",\"Тимофеевич\",\"Павлович\",\"Владимирович\",\"Олегович\",\"Юрьевич\",\"Ильич\",\"Федорович\",\"Степанович\",\"Григорьевич\",",
+									"\"Викторович\",\"Геннадьевич\",\"Георгиевич\",\"Филиппович\",\"Трофимович\",\"Петрович\",\"Наумович\",\"Прохорович\",\"Львович\",\"Гаврилович\",",
+									"\"Васильевич\",\"Евгеньевич\",\"Валерьевич\",\"Константинович\",\"Ефимович\",\"Семенович\",\"Арсеньевич\",\"Станиславович\",\"Тихонович\",\"Захарович\",",
+									"\"Фомич\",\"Леонидович\",\"Глебович\",\"Борисович\",\"Савельевич\",\"Тарасович\",\"Богданович\",\"Ярославович\",\"Елисеевич\",\"Лукич\",",
+									"\"Амирович\",\"Артурович\",\"Маркович\",\"Русланович\",\"Тимурович\",\"Эдуардович\",\"Германович\",\"Антонович\",\"Миронович\",\"Даниилович\",",
+									"\"Серафимович\",\"Светославович\",\"Ростиславович\",\"Добрынич\",\"Архипович\",\"Всеволодович\",\"Ратмирович\",\"Корнеевич\",\"Кузьмич\",\"Игнатович\",",
+									"\"Денисович\",\"Елизарович\",\"Фадеевич\",\"Макарович\",\"Родионович\",\"Еремеевич\",\"Платонович\",\"Силантьевич\",\"Анатольевич\",\"Феоктистович\",",
+									"\"Саввич\",\"Мартынович\",\"Федосьевич\",\"Ульянович\",\"Егорович\",\"Эмильевич\",\"Трофимович\",\"Артемович\",\"Яковлевич\",\"Гордеевич\",",
+									"\"Евлампиевич\",\"Титонович\",\"Мирославович\",\"Демидович\",\"Славомирович\",\"Егорьевич\"",
+									"];",
+									"",
+									"// Случайный элемент массива",
+									"function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }",
+									"",
+									"// Устанавливаем ФИО",
+									"pm.variables.set(\"firstName\", rand(firstNames));",
+									"pm.variables.set(\"lastName\", rand(lastNames));",
+									"pm.variables.set(\"middleName\", rand(middleNames));",
+									"",
+									"//паспорт бро",
+									"pm.variables.set(\"passportNumber\", randomDigits(6));",
+									"pm.variables.set(\"passportSeries\", randomDigits(4));",
+									"pm.variables.set(\"passportCode\", randomDigits(3) + \"-\" + randomDigits(3));",
+									"",
+									"// всякая херня которая не нужна, но нужна",
+									"pm.variables.set(\"inn\", randomDigits(12));",
+									"pm.variables.set(\"snils\", randomDigits(11)); // снилс не пойму почему ругается, он кароче в карточке фл не проходит, а когда я его просто статичный поставил все ок ",
+									"pm.variables.set(\"registrationIndex\", randomDigits(6));",
+									"",
+									"// цифры чиркани",
+									"pm.variables.set(\"mobilePhone\", \"89\" + randomDigits(9));",
+									"pm.variables.set(\"jobPhone\", \"8495\" + randomDigits(7));",
+									"pm.variables.set(\"homePhone\", \"8495\" + randomDigits(7));",
+									"",
+									"// с др крч",
+									"pm.variables.set(\"dateBirthday\", randomBirthday());",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseJson = pm.response.json();   // ← ВАЖНО: pm.response, а не response",
+									"",
+									"if (responseJson.id !== undefined) {",
+									"    pm.environment.set(\"created_client_id\", responseJson.id.toString());",
+									"    console.log(\"ID сохранён:\", responseJson.id);",
+									"} else {",
+									"    console.log(\"Поле id не найдено в ответе\");",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dnRiNDExMTQ3NzpPenhtcDZiZyEhMXF3ZXJ0"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "ph_ShowedSnowHint=1; JSESSIONID=E38941C33EB801142FA767B470427BAB"
+							},
+							{
+								"key": "Origin",
+								"value": "https://iftdfg-ngc001lk.test.vtb.ru"
+							},
+							{
+								"key": "Referer",
+								"value": "https://iftdfg-ngc001lk.test.vtb.ru/"
+							},
+							{
+								"key": "Sec-Fetch-Dest",
+								"value": "empty"
+							},
+							{
+								"key": "Sec-Fetch-Mode",
+								"value": "cors"
+							},
+							{
+								"key": "Sec-Fetch-Site",
+								"value": "same-site"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contour\": {\r\n    \"id\": \"IFT\",\r\n    \"name\": \"ИФТ\"\r\n  },\r\n  \"tasks\": [\r\n    {\r\n      \"entityId\": \"client\",\r\n      \"data\": {\r\n        \"name_last\": \"{{lastName}}\",\r\n        \"name_first\": \"{{firstName}}\",\r\n        \"name_father\": \"{{middleName}}\",\r\n        \"date_birthday\": \"{{dateBirthday}}\",\r\n\r\n        \"identity_document_type\": \"21\",\r\n        \"passport_number\": \"{{passportNumber}}\",\r\n        \"passport_series\": \"{{passportSeries}}\",\r\n        \"passport_place_delivery\": \"ФМС России\",\r\n        \"passport_code\": \"{{passportCode}}\",\r\n        \"passport_date_delivery\": \"01.10.2021\",\r\n\r\n        \"inn\": \"{{inn}}\",\r\n        \"SNILS\": \"51146985588\",\r\n\r\n        \"id-country\": \"643\",\r\n        \"citizenship\": \"643\",\r\n\r\n        \"registration_city\": \"Москва\",\r\n        \"registration_street\": \"Лубянка\",\r\n        \"registration_house\": \"13\",\r\n        \"registration_flat\": \"15\",\r\n        \"place_birthday\": \"Москва\",\r\n        \"registration_index\": \"{{registrationIndex}}\",\r\n\r\n        \"email\": \"usemail@gmail.com\",\r\n        \"mobile_phone\": \"{{mobilePhone}}\",\r\n        \"job_phone\": \"{{jobPhone}}\",\r\n        \"home_phone\": \"{{homePhone}}\",\r\n\r\n        \"blacklist\": \"NONE\",\r\n        \"identificationType\": \"1\",\r\n        \"segment_light\": \"N\",\r\n        \"VIP\": \"N\",\r\n        \"retail_service_flag\": \"N\",\r\n\r\n        \"ac_domain\": \"master\",\r\n        \"create_ac20_bco\": \"TRUE\",\r\n        \"generate_tbid\": \"FALSE\",\r\n        \"identificationStatusLSGF\": \"FULL\",\r\n        \r\n        \"createInWAY4VTB\": \"FALSE\",\r\n        \"createInWAY4AIR\": \"FALSE\",\r\n        \"createInLSGF\": \"FALSE\",\r\n        \"createInWAY4OLD\": \"FALSE\",\r\n\r\n        \"bankEmployee\": \"0\",\r\n        \"rezidentFlag\": \"true\",\r\n        \"genderCode\": \"1\"\r\n      }\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://iftdfg-apc001lk.test.vtb.ru:51000/orders",
+							"protocol": "https",
+							"host": [
+								"iftdfg-apc001lk",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"port": "51000",
+							"path": [
+								"orders"
+							]
+						},
+						"description": "Generated from a curl request: \ncurl 'https://iftdfg-apc001lk.test.vtb.ru:51000/orders' \\\n  -H 'Accept: application/json, text/plain, */*' \\\n  -H 'Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7' \\\n  -H 'Authorization: Basic dnRiNDExMTQ3NzpPenhtcDZiZyEhMXFxd3dlZQ==' \\\n  -H 'Connection: keep-alive' \\\n  -H 'Content-Type: application/json;charset=UTF-8' \\\n  -H 'Cookie: ph_ShowedSnowHint=1; JSESSIONID=E38941C33EB801142FA767B470427BAB' \\\n  -H 'Origin: https://iftdfg-ngc001lk.test.vtb.ru' \\\n  -H 'Referer: https://iftdfg-ngc001lk.test.vtb.ru/' \\\n  -H 'Sec-Fetch-Dest: empty' \\\n  -H 'Sec-Fetch-Mode: cors' \\\n  -H 'Sec-Fetch-Site: same-site' \\\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36' \\\n  -H 'sec-ch-ua: \\\"Google Chrome\\\";v=\\\"113\\\", \\\"Chromium\\\";v=\\\"113\\\", \\\"Not-A.Brand\\\";v=\\\"24\\\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \\\"Windows\\\"' \\\n  --data-raw '{\\\"contour\\\":{\\\"id\\\":\\\"IFT\\\",\\\"name\\\":\\\"ИФТ\\\"},\\\"tasks\\\":[{\\\"entityId\\\":\\\"client\\\",\\\"data\\\":{\\\"name_last\\\":\\\"Потапов\\\",\\\"name_first\\\":\\\"Агриппина\\\",\\\"name_father\\\":\\\"Константинович\\\",\\\"date_birthday\\\":\\\"2007-09-11\\\",\\\"identity_document_type\\\":\\\"21\\\",\\\"passport_number\\\":\\\"710158\\\",\\\"passport_series\\\":\\\"9013\\\",\\\"passport_place_delivery\\\":\\\"ФМС России\\\",\\\"passport_code\\\":\\\"077-885\\\",\\\"passport_date_delivery\\\":\\\"01.10.2022\\\",\\\"inn\\\":\\\"418071228155\\\",\\\"SNILS\\\":\\\"31375170754\\\",\\\"id-country\\\":\\\"643\\\",\\\"registration_city\\\":\\\"Москва\\\",\\\"registration_street\\\":\\\"Лубянка\\\",\\\"registration_house\\\":\\\"13\\\",\\\"registration_flat\\\":\\\"15\\\",\\\"place_birthday\\\":\\\"Москва\\\",\\\"registration_index\\\":\\\"309765\\\",\\\"email\\\":\\\"usemail@gmail.com\\\",\\\"mobile_phone\\\":\\\"89177565842\\\",\\\"job_phone\\\":\\\"84951112233\\\",\\\"home_phone\\\":\\\"84951234567\\\",\\\"blacklist\\\":\\\"NONE\\\",\\\"identificationType\\\":\\\"1\\\",\\\"segment_light\\\":\\\"N\\\",\\\"VIP\\\":\\\"N\\\",\\\"retail_service_flag\\\":\\\"N\\\",\\\"citizenship\\\":\\\"643\\\",\\\"ac_domain\\\":\\\"guest\\\",\\\"create_ac20_bco\\\":\\\"TRUE\\\",\\\"identificationStatusLSGF\\\":\\\"FULL\\\",\\\"createInWAY4VTB\\\":\\\"FALSE\\\",\\\"createInWAY4AIR\\\":\\\"FALSE\\\",\\\"createInLSGF\\\":\\\"FALSE\\\",\\\"createInWAY4OLD\\\":\\\"FALSE\\\",\\\"bankEmployee\\\":\\\"0\\\",\\\"rezidentFlag\\\":\\\"true\\\",\\\"genderCode\\\":\\\"1\\\"}}]}' \\\n  --compressed \\\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "2. Проверка статуса + получение МДМ (partyUid) Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"let json = pm.response.json();",
+									"let partyUid = null;",
+									"",
+									"if (",
+									"    json.tasks &&",
+									"    json.tasks.length > 0 &&",
+									"    json.tasks[0].data &&",
+									"    json.tasks[0].data.partyUid",
+									") {",
+									"    partyUid = json.tasks[0].data.partyUid;",
+									"}",
+									"// под консоль забурил , нашел на SOF",
+									"if (partyUid) {",
+									"    pm.environment.set(\"mdm_client\", String(partyUid));",
+									"    console.log(\"mdm_client сохранён бро он вот такой\", partyUid);",
+									"} else {",
+									"    console.log(\"partyUid не найден, яхз ваще где он\");",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic dnRiNDExMTQ3NzpPenhtcDZiZyEhMXFxd3dlZQ=="
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "Cookie",
+								"value": "ph_ShowedSnowHint=1; JSESSIONID=E38941C33EB801142FA767B470427BAB"
+							},
+							{
+								"key": "Origin",
+								"value": "https://iftdfg-ngc001lk.test.vtb.ru"
+							},
+							{
+								"key": "Referer",
+								"value": "https://iftdfg-ngc001lk.test.vtb.ru/"
+							},
+							{
+								"key": "Sec-Fetch-Dest",
+								"value": "empty"
+							},
+							{
+								"key": "Sec-Fetch-Mode",
+								"value": "cors"
+							},
+							{
+								"key": "Sec-Fetch-Site",
+								"value": "same-site"
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Google Chrome\";v=\"113\", \"Chromium\";v=\"113\", \"Not-A.Brand\";v=\"24\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							}
+						],
+						"url": {
+							"raw": "https://iftdfg-apc001lk.test.vtb.ru:51000/orders/{{created_client_id}}",
+							"protocol": "https",
+							"host": [
+								"iftdfg-apc001lk",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"port": "51000",
+							"path": [
+								"orders",
+								"{{created_client_id}}"
+							]
+						},
+						"description": "Generated from a curl request: \ncurl 'https://iftdfg-apc001lk.test.vtb.ru:51000/orders/150618' \\\n  -H 'Accept: application/json, text/plain, */*' \\\n  -H 'Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7' \\\n  -H 'Authorization: Basic dnRiNDExMTQ3NzpPenhtcDZiZyEhMXFxd3dlZQ==' \\\n  -H 'Connection: keep-alive' \\\n  -H 'Cookie: ph_ShowedSnowHint=1; JSESSIONID=E38941C33EB801142FA767B470427BAB' \\\n  -H 'Origin: https://iftdfg-ngc001lk.test.vtb.ru' \\\n  -H 'Referer: https://iftdfg-ngc001lk.test.vtb.ru/' \\\n  -H 'Sec-Fetch-Dest: empty' \\\n  -H 'Sec-Fetch-Mode: cors' \\\n  -H 'Sec-Fetch-Site: same-site' \\\n  -H 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36' \\\n  -H 'sec-ch-ua: \\\"Google Chrome\\\";v=\\\"113\\\", \\\"Chromium\\\";v=\\\"113\\\", \\\"Not-A.Brand\\\";v=\\\"24\\\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \\\"Windows\\\"' \\\n  --compressed \\\n  --insecure"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/affiliate/add — добавление клиента в список аффилированных лиц",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"masterMdmId\": \"5300745487\",\n    \"affiliateMdmId\": \"{{mdm_client}}\",\n    \"relativeId\": 4,\n    \"specificRelation\": \"артема друг брат коллега\"\n}"
+						},
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/addAffiliateClient/v1/ext/affiliate/add",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"addAffiliateClient",
+								"v1",
+								"ext",
+								"affiliate",
+								"add"
+							]
+						},
+						"description": "добавление клиента в список аффилированных лиц"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/affiliates/{mdmId} — Получить список аффилированных лиц клиента",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getAffiliatesClientsByMdmId/v2/ext/affiliates/5300745487",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getAffiliatesClientsByMdmId",
+								"v2",
+								"ext",
+								"affiliates",
+								"5300745487"
+							]
+						},
+						"description": "Получить список аффилированных лиц клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/branch/by-id/{id} — Данные по точке продаж",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getBranchInfoByBranchId/v2/ext/branch/by-id/959501",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getBranchInfoByBranchId",
+								"v2",
+								"ext",
+								"branch",
+								"by-id",
+								"959501"
+							]
+						},
+						"description": "Данные по точке продаж"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/check/personalManager — труе ТП одна",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let json = pm.response.json();",
+									"",
+									"pm.test(\"isAllowed\" === true, function() {",
+									"    pm.expect(json.isAllowed).to.eql(true);",
+									"    ",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"1073537212\"\n}"
+						},
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/checkEmployeeAndCustomerBranch/v2/ext/check/personalManager",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"checkEmployeeAndCustomerBranch",
+								"v2",
+								"ext",
+								"check",
+								"personalManager"
+							]
+						},
+						"description": "Проверить возможности получения данных в карточке сотрудника"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/check/personalManager — false (разные тП)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"let json = pm.response.json();",
+									"",
+									"pm.test(\"isAllowed\" === false, function() {",
+									"    pm.expect(json.isAllowed).to.eql(false);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"5300560047\"\n}"
+						},
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/checkEmployeeAndCustomerBranch/v2/ext/check/personalManager",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"checkEmployeeAndCustomerBranch",
+								"v2",
+								"ext",
+								"check",
+								"personalManager"
+							]
+						},
+						"description": "Проверить возможности получения данных в карточке сотрудника"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролям(PM)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"VTB4111477\",\n  \"roles\": [\"PERSONAL_MANAGER\"]}"
+						},
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientsByEmployeeLogin/v2/ext/customers/by-login-roles",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientsByEmployeeLogin",
+								"v2",
+								"ext",
+								"customers",
+								"by-login-roles"
+							]
+						},
+						"description": "Все клиенты сотрудника по ролям"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролям PFM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"VTB4111477\",\n  \"roles\": [\"PFM\"]}"
+						},
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientsByEmployeeLogin/v2/ext/customers/by-login-roles",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientsByEmployeeLogin",
+								"v2",
+								"ext",
+								"customers",
+								"by-login-roles"
+							]
+						},
+						"description": "Все клиенты сотрудника по ролям"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/customers/by-login/{login} — Все клиенты менеджера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientsByPersonalManagerLogin/v2/ext/customers/by-login/VTB4111477",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientsByPersonalManagerLogin",
+								"v2",
+								"ext",
+								"customers",
+								"by-login",
+								"VTB4111477"
+							]
+						},
+						"description": "Все клиенты менеджера"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/customers/by-tabnum/{tabnum} — Все клиенты менеджера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getEmployeeByTubNum/v2/ext/employee/by-tabnum/00016487",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getEmployeeByTubNum",
+								"v2",
+								"ext",
+								"employee",
+								"by-tabnum",
+								"00016487"
+							]
+						},
+						"description": "Все клиенты менеджера"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/employee/by-tabnum/{tabnum} — Информация о сотруднике по табельному номеру",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getEmployeeByTubNum/v2/ext/employee/by-tabnum/09923664",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getEmployeeByTubNum",
+								"v2",
+								"ext",
+								"employee",
+								"by-tabnum",
+								"09923664"
+							]
+						},
+						"description": "Информация о сотруднике по табельному номеру"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/familyCircle/{mdmId} — Получить информацию о связанных через ПУ Семейный по mdmId клиента",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getFamilyCircleClientsByMdmId/v1/ext/familyCircle/5301163469",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getFamilyCircleClientsByMdmId",
+								"v1",
+								"ext",
+								"familyCircle",
+								"5301163469"
+							]
+						},
+						"description": "Получить информацию о связанных через ПУ Семейный по mdmId клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/inn/{mdmId} — Получить список организаций у клиента",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getInnByMdmId/v1/ext/inn/5300975391",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getInnByMdmId",
+								"v1",
+								"ext",
+								"inn",
+								"5300975391"
+							]
+						},
+						"description": "Получить список организаций у клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/managers/{mdmId} — Основной и замещающий менеджеры клиента(PRIME)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_5"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientManagersByMdmId/v3/ext/managers/2161141075",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientManagersByMdmId",
+								"v3",
+								"ext",
+								"managers",
+								"2161141075"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/managers/{mdmId} — Основной и замещающий менеджеры клиента(PRIME) Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_5"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientManagersByMdmId/v3/ext/managers/5301634913",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientManagersByMdmId",
+								"v3",
+								"ext",
+								"managers",
+								"5301634913"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/serviceteam/{mdmId} — Метод возвращает КО PRIV",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientServiceTeamByMdmId/v3/ext/serviceteam/1233630524",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientServiceTeamByMdmId",
+								"v3",
+								"ext",
+								"serviceteam",
+								"1233630524"
+							]
+						},
+						"description": "Метод возвращает КО заданного клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/serviceteam/{mdmId} — Метод возвращает КО PRiME",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientServiceTeamByMdmId/v3/ext/serviceteam/5301614758",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientServiceTeamByMdmId",
+								"v3",
+								"ext",
+								"serviceteam",
+								"5301614758"
+							]
+						},
+						"description": "Метод возвращает КО заданного клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/supervisors — Супервизоры в точке продаж и отделении",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getSupervisorsByBranchId/v2/ext/supervisors?departmentId=00011793&pos=3510",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getSupervisorsByBranchId",
+								"v2",
+								"ext",
+								"supervisors"
+							],
+							"query": [
+								{
+									"key": "departmentId",
+									"value": "00011793"
+								},
+								{
+									"key": "pos",
+									"value": "3510"
+								}
+							]
+						},
+						"description": "Супервизоры в точке продаж и отделении"
+					},
+					"response": []
+				},
+				{
+					"name": "GET / Получить метки по МДМ айди  ext/marks/{mdmId}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1141",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://iftyk-gw-lan-main-lb.test.vtb.ru/inside/public/app/publicapi/rb/tbcv/getClientMarksByMdmId/v1/ext/marks/5300745487",
+							"protocol": "https",
+							"host": [
+								"iftyk-gw-lan-main-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"inside",
+								"public",
+								"app",
+								"publicapi",
+								"rb",
+								"tbcv",
+								"getClientMarksByMdmId",
+								"v1",
+								"ext",
+								"marks",
+								"5300745487"
+							]
+						},
+						"description": "Супервизоры в точке продаж и отделении"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "EPA",
+			"item": [
+				{
+					"name": "GET /ext/affiliates/{mdmId} — Получить список аффилированных лиц клиента",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getAffiliatesClientsByMdmId/v1/ext/affiliates/5300012958",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getAffiliatesClientsByMdmId",
+								"v1",
+								"ext",
+								"affiliates",
+								"5300012958"
+							]
+						},
+						"description": "Получить список аффилированных лиц клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/branch/by-id/{id} — Данные по точке продаж",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getBranchInfoByBranchId/v1/ext/branch/by-id/1905",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getBranchInfoByBranchId",
+								"v1",
+								"ext",
+								"branch",
+								"by-id",
+								"1905"
+							]
+						},
+						"description": "Данные по точке продаж"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/check/personalManager — TRUE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"1073537212\"\n}"
+						},
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv_sofk/v1/ext/check/personalManager",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv_sofk",
+								"v1",
+								"ext",
+								"check",
+								"personalManager"
+							]
+						},
+						"description": "Проверить возможности получения данных в карточке сотрудника"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/check/personalManager — FALSE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"5300560047\"\n}"
+						},
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv_sofk/v1/ext/check/personalManager",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv_sofk",
+								"v1",
+								"ext",
+								"check",
+								"personalManager"
+							]
+						},
+						"description": "Проверить возможности получения данных в карточке сотрудника"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/client/card/access/by-login — Предоставить для сотрудника безверификационный доступ к клиенту",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"mdmId\": \"5301797333\",\n  \"login\": \"VTB4111477\"\n}"
+						},
+						"url": {
+							"raw": "https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru/ext/client/card/access/by-login",
+							"protocol": "https",
+							"host": [
+								"tbcv-vip-prime-sofk",
+								"ift01",
+								"tbcv",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"ext",
+								"client",
+								"card",
+								"access",
+								"by-login"
+							]
+						},
+						"description": "Предоставить для сотрудника безверификационный доступ к клиенту"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролямPM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"VTB4111477\",\r\n    \"roles\": [\r\n        \"PERSONAL_MANAGER\"\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getclientsbyemployeelogin/v1/ext/customers/by-login-roles",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getclientsbyemployeelogin",
+								"v1",
+								"ext",
+								"customers",
+								"by-login-roles"
+							]
+						},
+						"description": "Все клиенты сотрудника по ролям"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролям PFM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"VTB4111477\",\r\n    \"roles\": [\r\n        \"PFM\"\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getclientsbyemployeelogin/v1/ext/customers/by-login-roles",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getclientsbyemployeelogin",
+								"v1",
+								"ext",
+								"customers",
+								"by-login-roles"
+							]
+						},
+						"description": "Все клиенты сотрудника по ролям"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/customers/by-tabnum/{tabnum} — Все клиенты менеджера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getClientsByPersonalManagerTubNum/v1/ext/customers/by-tabnum/00010041",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getClientsByPersonalManagerTubNum",
+								"v1",
+								"ext",
+								"customers",
+								"by-tabnum",
+								"00010041"
+							]
+						},
+						"description": "Все клиенты менеджера"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/employee/by-tabnum/{tabnum} — Информация о сотруднике по табельному номеру",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getEmployeeByTubNum/v1/ext/employee/by-tabnum/92269481",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getEmployeeByTubNum",
+								"v1",
+								"ext",
+								"employee",
+								"by-tabnum",
+								"92269481"
+							]
+						},
+						"description": "Информация о сотруднике по табельному номеру"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/managers/{mdmId} —ПМ+ШИФТ ПРИВ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_6"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getClientManagersByMdmId/v1/ext/managers/5300454386",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getClientManagersByMdmId",
+								"v1",
+								"ext",
+								"managers",
+								"5300454386"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/managers/{mdmId} —ПФМ+ШИФТ ПРАЙМ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_6"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getClientManagersByMdmId/v1/ext/managers/5300820904",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getClientManagersByMdmId",
+								"v1",
+								"ext",
+								"managers",
+								"5300820904"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/personalManagers/{mdmId} — ПФМ+ШИФТ ПРайм",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_5"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv_sofk/v1/ext/personalManagers/5300820904",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv_sofk",
+								"v1",
+								"ext",
+								"personalManagers",
+								"5300820904"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/personalManagers/{mdmId} — ПМ-ШИФТ прив",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_5"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv_sofk/v1/ext/personalManagers/5300454386",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv_sofk",
+								"v1",
+								"ext",
+								"personalManagers",
+								"5300454386"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/serviceteam/{mdmId} — KO privilege",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getClientServiceTeamByMdmId/v1/ext/serviceteam/5301634913",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getClientServiceTeamByMdmId",
+								"v1",
+								"ext",
+								"serviceteam",
+								"5301634913"
+							]
+						},
+						"description": "Метод возвращает КО заданного клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/serviceteam/{mdmId} — КО prime",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getClientServiceTeamByMdmId/v1/ext/serviceteam/5301935361",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getClientServiceTeamByMdmId",
+								"v1",
+								"ext",
+								"serviceteam",
+								"5301935361"
+							]
+						},
+						"description": "Метод возвращает КО заданного клиента"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ext/supervisors — Супервизоры в точке продаж и отделении",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getSupervisorsByBranchId/v1/ext/supervisors?pos=3510",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getSupervisorsByBranchId",
+								"v1",
+								"ext",
+								"supervisors"
+							],
+							"query": [
+								{
+									"key": "pos",
+									"value": "3510"
+								}
+							]
+						},
+						"description": "Супервизоры в точке продаж и отделении"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /v2/ext/managers/{mdmId} — Основной и замещающий менеджеры клиента",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Initiator-Service",
+								"value": "1447_5"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv/getClientManagersByMdmId/v2/ext/managers/5300009718",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv",
+								"getClientManagersByMdmId",
+								"v2",
+								"ext",
+								"managers",
+								"5300009718"
+							]
+						},
+						"description": "Основной и замещающий менеджеры клиента"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{EPATOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Интеграционные ручки",
+			"item": [
+				{
+					"name": "/cure/v1/roles/checkRoles (Получение ролей)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-Login",
+								"value": "VTB4111477@test.vtb.ru"
+							},
+							{
+								"key": "X-initiator-Host",
+								"value": "tbcv-vip-prime-spo-bff-769fd5685c-wkqqd"
+							},
+							{
+								"key": "X-Call-ID",
+								"value": "e11e4e33-9d21-4015-a2a2-1b146be486f8"
+							},
+							{
+								"key": "X-initiator-Service",
+								"value": "tbcv-vip-prime-spo-bff"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "IG_JSESSIONID=B5E17504F4D0D8AC55B05FEEB65728AB; BIGipServer~epa-ig-if-lb-f5.test.vtb.ru~POOL-epa-ig-if-lb-f5.test.vtb.ru-443=rd904o00000000000000000000ffff0ade6bcao443; BIGipServer~epa-ig-if-lb-f5.test.vtb.ru~POOL-epa-ig-if-lb-f5.test.vtb.ru-443=rd904o00000000000000000000ffff0ade6bcao443; IG_JSESSIONID=24598E5ED8A2489E9C63B2FCDF53A155; BIGipServer~epa-ig-if-lb-f5.test.vtb.ru~POOL-epa-ig-if-lb-f5.test.vtb.ru-443=rd904o00000000000000000000ffff0ade6bcbo443; IG_JSESSIONID=D74835C5F71846FF8FC35E0DEAAE5C96"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AQIC5wM2LY4Sfcw9VLVo7dDKLaWcsBlkfSJ9QJd8BUuL-1A.*AAJTSQACMDEAAlNLABMxMDgyOTAwMDk4NDkyODk2NzMxAAJTMQACMDE.*",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"VTB4111477\",\n    \"roles\": [\n        {\n            \"name\": \"tbcv_viewall\"\n        },\n        {\n            \"name\": \"mpriv_dir\"\n        },\n        {\n            \"name\": \"primeservice_invloment\"\n        },\n        {\n            \"name\": \"dirpriv_headgroup\"\n        },\n        {\n            \"name\": \"vipmprime_vipclient\"\n        },\n        {\n            \"name\": \"udgo_prime\"\n        },\n        {\n            \"name\": \"attractiongroup_DKO\"\n        },\n        {\n            \"name\": \"supervisor_DKO\"\n        },\n        {\n            \"name\": \"supervisor_upip\"\n        },\n        {\n            \"name\": \"primeservice_chief\"\n        },\n        {\n            \"name\": \"super_vip\"\n        },\n        {\n            \"name\": \"udgo_priv\"\n        },\n        {\n            \"name\": \"primecontrl\"\n        },\n        {\n            \"name\": \"dirpriv_branchdeputy\"\n        },\n        {\n            \"name\": \"investconsultant\"\n        },\n        {\n            \"name\": \"udgo_rsk\"\n        },\n        {\n            \"name\": \"dirprime_vipofficedeputy\"\n        },\n        {\n            \"name\": \"vipmprime_topaffluent\"\n        },\n        {\n            \"name\": \"vipmprime_vipman\"\n        },\n        {\n            \"name\": \"pm_DKO\"\n        },\n        {\n            \"name\": \"dirpriv_branch\"\n        },\n        {\n            \"name\": \"vipmprime_dirvipman\"\n        },\n        {\n            \"name\": \"dirprime_vipoffice\"\n        },\n        {\n            \"name\": \"mpriv_pm\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/tbcv-cure/cure/v1/roles/checkRoles",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"tbcv-cure",
+								"cure",
+								"v1",
+								"roles",
+								"checkRoles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Карточка сотрудника - bscs/v3/by-login/VTB4111477",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-TYK-API-KEY",
+								"value": "eyJvcmciOiI1ZmVkYTQ5NTAwZTQyMzEwZjEyNzY4OWMiLCJpZCI6InRiY3ZfZXBhX3NvZmtfazNAdGVzdC52dGIucnUiLCJoIjoibXVybXVyMzIifQ==",
+								"disabled": true
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.26.8"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/cross/bscs/v3/by-login/VTB4094467A",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"cross",
+								"bscs",
+								"v3",
+								"by-login",
+								"VTB4094467A"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Карточка ФЛ - cspc/v1/get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-TYK-API-KEY",
+								"value": "eyJvcmciOiI1ZmVkYTQ5NTAwZTQyMzEwZjEyNzY4OWMiLCJpZCI6InRiY3ZfZXBhX3NvZmtfazNAdGVzdC52dGIucnUiLCJoIjoibXVybXVyMzIifQ=="
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.26.8"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive"
+							},
+							{
+								"key": "X-CSPC-RISCODE",
+								"value": "1447_8"
+							},
+							{
+								"key": "x-initiator-service",
+								"value": "1447_8"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"headerRequest\": {\r\n        \"creationDateTime\": \"2022-04-06T13:41:13.2309165+03:00\",\r\n        \"messageID\": \"a2c437bf-f252-4366-9de9-53a9d2158c4d\",\r\n        \"systemFrom\": \"1447_8\",\r\n        \"systemTo\": \"396\",\r\n        \"timeout\": 30\r\n    },\r\n    \"messageRequest\": {\r\n        \"person\": [\r\n            {\r\n                \"partyUId\": \"5300615952\" // mdm_id client\r\n            }\r\n        ]\r\n    }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://epa-ig-rr-lb.test.vtb.ru/api/rb/frsvsc/cspc/v1/get",
+							"protocol": "https",
+							"host": [
+								"epa-ig-rr-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"frsvsc",
+								"cspc",
+								"v1",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Наш МОК sale-points-incremental-update (без токена)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Initiator-Service",
+								"value": "1447_1"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AQIC5wM2LY4SfczktV-WDGCUlJCutQ6md-5fbfhirxIjfU8.*AAJTSQACMDIAAlNLABMzNTIxOTE2MjcwMDA3ODAzOTg1AAJTMQACMDE.*"
+							},
+							{
+								"key": "Cookie",
+								"value": "JSESSIONID=924170E61A635187ABD30BB756114030"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"salePointCode\":\"111111111188\",\r\n\"salePointName\":\"Несостоятельные ребята из ВТБ6\",\r\n\"address\":\"123464,Самара,г.Бельдяево,ул.Противоправная д.7\",\r\n\"servedBusiness\":\"ФЛ\",\r\n\"city\":\"Бердяево\",\r\n\"openHoursIndividual\":[\r\n\t      {\r\n            \"days\":\"пн\",\r\n            \"hours\":\"09:00-19:00\"\r\n          \t\r\n          },\r\n          {\r\n          \t\"days\":\"вт\",\r\n            \"hours\":\"09:00-19:00\"},\r\n            {\r\n            \t\"days\":\"ср\",\r\n            \t\"hours\":\"09:00-19:00\"\r\n            \t\r\n            },\r\n            {\r\n            \t\"days\":\"чт\",\r\n            \t\"hours\":\"09:00-19:00\"\r\n            \t\r\n            },\r\n            {\r\n            \t\"days\":\"пт\",\r\n            \t\"hours\":\"09:00-19:00\"\r\n            \t\r\n            },\r\n            {\r\n            \t\"days\":\"сб\",\r\n            \t\"hours\":\"10:00-17:00\"\r\n            \t\r\n            },\r\n            {\r\n            \t\"days\":\"вс\",\r\n            \t\"hours\":\"выходной\"\r\n            \t\r\n            }\r\n            ]\r\n}"
+						},
+						"url": {
+							"raw": "https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru/mock/sale-points-incremental-update",
+							"protocol": "https",
+							"host": [
+								"tbcv-vip-prime-sofk",
+								"ift01",
+								"tbcv",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"mock",
+								"sale-points-incremental-update"
+							]
+						},
+						"description": "Generated from a curl request: \ncurl --location --request POST 'https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru/mock/sale-points-incremental-update' \\\n\n--header 'Initiator-Service: 1447_1' \\\n\n--header 'Content-Type: application/json' \\\n\n--header 'Authorization: Bearer AQIC5wM2LY4SfczktV-WDGCUlJCutQ6md-5fbfhirxIjfU8.*AAJTSQACMDIAAlNLABMzNTIxOTE2MjcwMDA3ODAzOTg1AAJTMQACMDE.*' \\\n\n--header 'Cookie: JSESSIONID=924170E61A635187ABD30BB756114030' \\\n\n--data-raw '{\n\n    \\\"salePointCode\\\": \\\"3422\\\",\n\n  \\\"salePointName\\\": \\\"Состоятельные ребята из ВТБ 6\\\",\n\n    \\\"address\\\": \\\"186930, Карелия, г. Костомукша, ул. Антикайнена д. 7\\\",\n\n  \\\"servedBusiness\\\": \\\"ФЛ\\\",\n\n  \\\"city\\\": \\\"Костомукша\\\",\n\n  \\\"openHoursIndividual\\\": [\n\n        {\n\n            \\\"days\\\": \\\"пн\\\",\n\n            \\\"hours\\\": \\\"09:00-19:00\\\"\n\n        },\n\n        {\n\n            \\\"days\\\": \\\"вт\\\",\n\n            \\\"hours\\\": \\\"09:00-19:00\\\"\n\n        },\n\n        {\n\n            \\\"days\\\": \\\"ср\\\",\n\n            \\\"hours\\\": \\\"09:00-19:00\\\"\n\n        },\n\n        {\n\n            \\\"days\\\": \\\"чт\\\",\n\n            \\\"hours\\\": \\\"09:00-19:00\\\"\n\n        },\n\n        {\n\n            \\\"days\\\": \\\"пт\\\",\n\n            \\\"hours\\\": \\\"09:00-19:00\\\"\n\n        },\n\n        {\n\n            \\\"days\\\": \\\"сб\\\",\n\n            \\\"hours\\\": \\\"10:00-17:00\\\"\n\n        },\n\n        {\n\n            \\\"days\\\": \\\"вс\\\",\n\n            \\\"hours\\\": \\\"выходной\\\"\n\n        }\n\n    ]\n\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "1503 Проверка ПУ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPATOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Initiator-Service",
+								"value": "1447_8"
+							},
+							{
+								"key": "X-mdm-id",
+								"value": "5301993832"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer AQIC5wM2LY4Sfcz2mCEBhEaDIE4OYtPEGkA5d1rlbBhygfo.*AAJTSQACMDEAAlNLABQtODI5Mzc3MTQzODc4MDk2NDM1MQACUzEAAjAx*",
+								"disabled": true
+							},
+							{
+								"key": "Cookie",
+								"value": "amlbcookie=01; AMAuthCookie=AQIC5wM2LY4SfcxpfW6-X0HND7N-z7W_zrcxsp77eWe-ERE.*AAJTSQACMDEAAlNLABQtNjc5NTM5NDExNjA1NTA1Njg2NwACUzEAAjAx*; BIGipServer~epa-ig-if-lb-f5.test.vtb.ru~POOL-epa-ig-if-lb-f5.test.vtb.ru-443=rd904o00000000000000000000ffff0ade6bcbo443; IG_JSESSIONID=6CD5C13E98EA4480CF27F0FDAEBE57A5",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://epa-ig-if-lb.test.vtb.ru/api/rb/prp/aggregator/v2/package/list?status-mode=ACTIVE",
+							"protocol": "https",
+							"host": [
+								"epa-ig-if-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"prp",
+								"aggregator",
+								"v2",
+								"package",
+								"list"
+							],
+							"query": [
+								{
+									"key": "status-mode",
+									"value": "ACTIVE"
+								}
+							]
+						},
+						"description": "Generated from a curl request: \ncurl --location --request GET 'https://epa-ig-if-lb.test.vtb.ru/api/rb/prp/aggregator/v2/package/list?status-mode=ACTIVE' \\\n--header 'Content-Type: application/json' \\\n--header 'X-Initiator-Service: 1447_8' \\\n--header 'X-mdm-id: 1541129573' \\\n--header 'Authorization: Bearer AQIC5wM2LY4Sfcz2mCEBhEaDIE4OYtPEGkA5d1rlbBhygfo.*AAJTSQACMDEAAlNLABQtODI5Mzc3MTQzODc4MDk2NDM1MQACUzEAAjAx*' \\\n--header 'Cookie: amlbcookie=01; AMAuthCookie=AQIC5wM2LY4SfcxpfW6-X0HND7N-z7W_zrcxsp77eWe-ERE.*AAJTSQACMDEAAlNLABQtNjc5NTM5NDExNjA1NTA1Njg2NwACUzEAAjAx*; BIGipServer~epa-ig-if-lb-f5.test.vtb.ru~POOL-epa-ig-if-lb-f5.test.vtb.ru-443=rd904o00000000000000000000ffff0ade6bcbo443; IG_JSESSIONID=6CD5C13E98EA4480CF27F0FDAEBE57A5'\n"
+					},
+					"response": []
+				},
+				{
+					"name": "1442 PREPROD get FL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({\r",
+									"    url: 'https://epa-am-rr-lb.test.vtb.ru/passport/oauth2/token',\r",
+									"    method: 'POST',\r",
+									"    header:\r",
+									"          {'X-TYK-API-KEY': ' eyJvcmciOiI2MDA1OTE4MmQ4N2NiYzQ2OGI2NWJiYTEiLCJpZCI6InNvZmtfazRAcmVnaw9uLnZ0Yi5ydSIsImgiOiJtdXJtdXIzMiJ9',\r",
+									"          'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"          },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded : [\r",
+									"            {key: 'client_secret', value : '{y6U2wizDzPd)rYl'},\r",
+									"            {key: 'grant_type', value : 'client_credentials'},\r",
+									"            {key: 'client_id', value : 'tbcv_sofk_psi@app.b2c.vtb.ru'},\r",
+									"        ]\r",
+									"    }\r",
+									"}, function (err, res) { \r",
+									"    if (err) { \r",
+									"        console.log(err);\r",
+									"        return;\r",
+									"    }\r",
+									"    const json = res.json();\r",
+									"\r",
+									"    pm.environment.set(\"EPAtoken4\", json.access_token);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{EPAtoken4}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-CSPC-RISCODE",
+								"value": "1447_8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"headerRequest\": {\r\n        \"creationDateTime\": \"2026-04-20T11:51:49.974122333Z\",\r\n        \"messageID\": \"d2687e7c-41ac-4ec2-a5ff-27b0b994dfd5\",\r\n        \"systemFrom\": \"1447_8\",\r\n        \"systemTo\": \"396\",\r\n        \"timeout\": 0\r\n    },\r\n    \"messageRequest\": {\r\n        \"person\": [\r\n            {\r\n                \"partyUId\": \"5300615952\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://epa-ig-rr-lb.test.vtb.ru/api/rb/frsvsc/cspc/v1/get",
+							"protocol": "https",
+							"host": [
+								"epa-ig-rr-lb",
+								"test",
+								"vtb",
+								"ru"
+							],
+							"path": [
+								"api",
+								"rb",
+								"frsvsc",
+								"cspc",
+								"v1",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{EPATOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"Запрос токена в ЕПА...\");",
+					"",
+					"const tokenRequest = {",
+					"    url: 'https://epa-am-if-lb.test.vtb.ru/passport/oauth2/token',",
+					"    method: 'POST',",
+					"    header: [",
+					"        { key: 'Host', value: 'epa-am-if-lb.test.vtb.ru' },",
+					"        { key: 'X-TYK-API-KEY', value: 'eyJvcmciOiI2MDA1OTE4MmQ4N2NiYzQ2OGI2NWJiYTEiLCJpZCI6InNvZmtfazRAcmVnaw9uLnZ0Yi5ydSIsImgiOiJtdXJtdXIzMiJ9' },",
+					"        { key: 'User-Agent', value: 'PostmanRuntime/7.26.8' },",
+					"        { key: 'Accept', value: '*/*' },",
+					"        { key: 'Accept-Encoding', value: 'gzip, deflate, br' },",
+					"        { key: 'Connection', value: 'keep-alive' },",
+					"        { key: 'Content-Type', value: 'application/x-www-form-urlencoded' },",
+					"        { key: 'Cache-Control', value: 'no-cache' }",
+					"        // Postman-Token не обязателен, можно не передавать",
+					"    ],",
+					"    body: {",
+					"        mode: 'urlencoded',",
+					"        urlencoded: [",
+					"            { key: 'client_secret', value: '+5UloZrrACssc2!d', type: 'text' },",
+					"            { key: 'grant_type', value: 'client_credentials', type: 'text' },",
+					"            { key: 'client_id', value: 'tbcv_sofk_ift@app.b2c.vtb.ru', type: 'text' }",
+					"        ]",
+					"    }",
+					"};",
+					"",
+					"pm.sendRequest(tokenRequest, function (err, res) {",
+					"    if (err) {",
+					"        console.log('Ошибка при запросе токена:', err);",
+					"        return;",
+					"    }",
+					"",
+					"    let data;",
+					"    try {",
+					"        data = res.json();",
+					"    } catch (e) {",
+					"        console.log('Ошибка парсинга JSON:', e);",
+					"        return;",
+					"    }",
+					"",
+					"    // Ожидаем ответ вида: { \"access_token\": \"тут токен\" }",
+					"    if (data && data.access_token) {",
+					"        pm.environment.set('EPATOKEN', data.access_token);",
+					"        console.log('Токен сохранён в переменную EPATOKEN');",
+					"    } else {",
+					"        console.log('В ответе нет access_token:', data);",
+					"    }",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "EPATOKEN",
+			"value": ""
+		}
+	]
+}
