@@ -1,0 +1,2785 @@
+{
+  "info": {
+    "_postman_id": "merged-ext-epa-tyk-generated",
+    "name": "EXT EPA + TYK merged with Swagger schema checks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Merged from uploaded EXT collection and swagger swag.txt. Token is requested before every request and saved to Tepa."
+  },
+  "item": [
+    {
+      "name": "EPA",
+      "item": [
+        {
+          "name": "POST /ext/kro/operation/members — Получение ФИО сотруднников участвующих в КРО",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urlepa}}/ext/kro/operation/members",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"login\": \"string\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"employee\",\n      \"login\"\n    ],\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"login\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролямPM",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"VTB4111477\",\r\n    \"roles\": [\r\n        \"PERSONAL_MANAGER\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urlepa}}/api/rb/tbcv/getclientsbyemployeelogin/v1/ext/customers/by-login-roles",
+            "description": "Все клиенты сотрудника по ролям"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролям PFM",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"login\": \"VTB4111477\",\r\n    \"roles\": [\r\n        \"PFM\"\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urlepa}}/api/rb/tbcv/getclientsbyemployeelogin/v1/ext/customers/by-login-roles",
+            "description": "Все клиенты сотрудника по ролям"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/client/serviceteam — Получение команды обслуживания клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urlepa}}/ext/client/serviceteam",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mdmId\": \"5300745487\",\n  \"needActualization\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"customer\",\n    \"isExOb\",\n    \"isSuperVip\",\n    \"isTop\",\n    \"isVip\",\n    \"serviceGroup\",\n    \"servicePack\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"customer\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"properties\": {\n        \"mdm_id\": {\n          \"type\": \"string\"\n        },\n        \"last_name\": {\n          \"type\": \"string\"\n        },\n        \"first_name\": {\n          \"type\": \"string\"\n        },\n        \"middle_name\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"servicePack\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"properties\": {\n        \"name\": {\n          \"type\": \"string\"\n        },\n        \"type\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"UNKNOWN\",\n            \"PRIME\",\n            \"RETAIL\",\n            \"PRIVILEGE\"\n          ]\n        }\n      }\n    },\n    \"isVip\": {\n      \"type\": \"boolean\"\n    },\n    \"isTop\": {\n      \"type\": \"boolean\"\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"role\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"PERSONAL_MANAGER\",\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"branch\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"code\": {\n                \"type\": \"string\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"address\": {\n                \"type\": \"string\"\n              },\n              \"types\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"properties\": {\n                  \"present\": {\n                    \"type\": \"boolean\"\n                  }\n                }\n              }\n            }\n          },\n          \"manager\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"required\": [\n              \"firstName\",\n              \"id\",\n              \"lastName\",\n              \"middleName\"\n            ],\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"lastName\": {\n                \"type\": \"string\"\n              },\n              \"firstName\": {\n                \"type\": \"string\"\n              },\n              \"middleName\": {\n                \"type\": \"string\"\n              },\n              \"phoneNum\": {\n                \"type\": \"string\"\n              },\n              \"workPhoneNum\": {\n                \"type\": \"string\"\n              },\n              \"workPhoneExt\": {\n                \"type\": \"string\"\n              }\n            }\n          },\n          \"shift\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"required\": [\n              \"manager\"\n            ],\n            \"properties\": {\n              \"manager\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"required\": [\n                  \"firstName\",\n                  \"id\",\n                  \"lastName\",\n                  \"middleName\"\n                ],\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"lastName\": {\n                    \"type\": \"string\"\n                  },\n                  \"firstName\": {\n                    \"type\": \"string\"\n                  },\n                  \"middleName\": {\n                    \"type\": \"string\"\n                  },\n                  \"phoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneExt\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"shiftDateFrom\": {\n                \"type\": \"string\"\n              },\n              \"shiftDateTo\": {\n                \"type\": \"string\"\n              },\n              \"reason\": {\n                \"type\": \"string\"\n              }\n            }\n          }\n        }\n      }\n    },\n    \"serviceGroup\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"required\": [\n        \"kind\"\n      ],\n      \"properties\": {\n        \"id\": {\n          \"type\": \"integer\"\n        },\n        \"kind\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"UNASSIGNED\",\n            \"PRIME\",\n            \"AFFILIATE\",\n            \"TEMPORARY_AGREEMENT\",\n            \"TOP_AFFLUENT\",\n            \"ELSE\"\n          ]\n        }\n      }\n    },\n    \"tempAgreementExpirationDate\": {\n      \"type\": \"string\"\n    },\n    \"isExOb\": {\n      \"type\": \"boolean\"\n    },\n    \"isSuperVip\": {\n      \"type\": \"boolean\"\n    },\n    \"company\": {\n      \"type\": \"string\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/client/serviceteam/history/list — Получение истории изменения команды обслуживания клиента — Variant 1",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urlepa}}/ext/client/serviceteam/history/list",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": 1,\n  \"page\": 1,\n  \"pageSize\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"list\"\n  ],\n  \"properties\": {\n    \"list\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"comment\",\n          \"datetime\",\n          \"type\"\n        ],\n        \"properties\": {\n          \"datetime\": {\n            \"type\": \"string\"\n          },\n          \"type\": {\n            \"type\": \"string\"\n          },\n          \"comment\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"additionalProperties\": true,\n              \"required\": [\n                \"name\",\n                \"value\"\n              ],\n              \"properties\": {\n                \"name\": {\n                  \"type\": \"string\"\n                },\n                \"value\": {\n                  \"type\": \"string\"\n                }\n              }\n            }\n          },\n          \"requester\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"properties\": {\n              \"employee\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"required\": [\n                  \"firstName\",\n                  \"id\",\n                  \"lastName\",\n                  \"middleName\"\n                ],\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"lastName\": {\n                    \"type\": \"string\"\n                  },\n                  \"firstName\": {\n                    \"type\": \"string\"\n                  },\n                  \"middleName\": {\n                    \"type\": \"string\"\n                  },\n                  \"phoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneExt\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"branch\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"code\": {\n                    \"type\": \"string\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  },\n                  \"address\": {\n                    \"type\": \"string\"\n                  },\n                  \"types\": {\n                    \"type\": \"object\",\n                    \"additionalProperties\": true,\n                    \"properties\": {\n                      \"present\": {\n                        \"type\": \"boolean\"\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"aggregates\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"required\": [\n        \"total\"\n      ],\n      \"properties\": {\n        \"total\": {\n          \"type\": \"integer\"\n        },\n        \"sortableFields\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/client/serviceteam/history/list — Получение истории изменения команды обслуживания клиента — Variant 2",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urlepa}}/ext/client/serviceteam/history/list",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": 1,\n  \"page\": 1,\n  \"pageSize\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"list\"\n  ],\n  \"properties\": {\n    \"list\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"comment\",\n          \"datetime\",\n          \"type\"\n        ],\n        \"properties\": {\n          \"datetime\": {\n            \"type\": \"string\"\n          },\n          \"type\": {\n            \"type\": \"string\"\n          },\n          \"comment\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"additionalProperties\": true,\n              \"required\": [\n                \"name\",\n                \"value\"\n              ],\n              \"properties\": {\n                \"name\": {\n                  \"type\": \"string\"\n                },\n                \"value\": {\n                  \"type\": \"string\"\n                }\n              }\n            }\n          },\n          \"requester\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"properties\": {\n              \"employee\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"required\": [\n                  \"firstName\",\n                  \"id\",\n                  \"lastName\",\n                  \"middleName\"\n                ],\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"lastName\": {\n                    \"type\": \"string\"\n                  },\n                  \"firstName\": {\n                    \"type\": \"string\"\n                  },\n                  \"middleName\": {\n                    \"type\": \"string\"\n                  },\n                  \"phoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneExt\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"branch\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"code\": {\n                    \"type\": \"string\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  },\n                  \"address\": {\n                    \"type\": \"string\"\n                  },\n                  \"types\": {\n                    \"type\": \"object\",\n                    \"additionalProperties\": true,\n                    \"properties\": {\n                      \"present\": {\n                        \"type\": \"boolean\"\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"aggregates\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"required\": [\n        \"total\"\n      ],\n      \"properties\": {\n        \"total\": {\n          \"type\": \"integer\"\n        },\n        \"sortableFields\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/client/card/access/by-login — Предоставить для сотрудника безверификационный доступ к клиенту",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mdmId\": \"5301797333\",\n  \"login\": \"VTB4111477\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru/ext/client/card/access/by-login",
+            "description": "Предоставить для сотрудника безверификационный доступ к клиенту"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"customer\",\n    \"serviceTeam\"\n  ],\n  \"properties\": {\n    \"customer\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"properties\": {\n        \"lastName\": {\n          \"type\": \"string\"\n        },\n        \"firstName\": {\n          \"type\": \"string\"\n        },\n        \"middleName\": {\n          \"type\": \"string\"\n        },\n        \"branchExtCode\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"serviceTeam\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"firstName\",\n          \"lastName\",\n          \"role\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"PERSONAL_MANAGER\",\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/check/personalManager — TRUE",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"1073537212\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urlepa}}/api/rb/tbcv_sofk/v1/ext/check/personalManager",
+            "description": "Проверить возможности получения данных в карточке сотрудника"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"isAllowed\"\n  ],\n  \"properties\": {\n    \"isAllowed\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/check/personalManager — FALSE",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"5300560047\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urlepa}}/api/rb/tbcv_sofk/v1/ext/check/personalManager",
+            "description": "Проверить возможности получения данных в карточке сотрудника"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"isAllowed\"\n  ],\n  \"properties\": {\n    \"isAllowed\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/affiliate/add — добавление клиента в список аффилированных лиц — URL synthesized",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"mdmId\",\n    \"relativeName\"\n  ],\n  \"properties\": {\n    \"mdmId\": {\n      \"type\": \"string\"\n    },\n    \"lastName\": {\n      \"type\": \"string\"\n    },\n    \"firstName\": {\n      \"type\": \"string\"\n    },\n    \"middleName\": {\n      \"type\": \"string\"\n    },\n    \"birthDate\": {\n      \"type\": \"string\"\n    },\n    \"relativeName\": {\n      \"type\": \"string\"\n    },\n    \"specificRelation\": {\n      \"type\": \"string\"\n    },\n    \"isApproved\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"masterMdmId\": \"5300745487\",\n    \"affiliateMdmId\": \"{{mdm_client}}\",\n    \"relativeId\": 4,\n    \"specificRelation\": \"артема друг брат коллега\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urlepa}}/ext/affiliate/add",
+            "description": "добавление клиента в список аффилированных лиц"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /v2/ext/serviceteam/{mdmId} — Метод возвращает КО заданного клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": "{{urlepa}}/v2/ext/serviceteam/5300745487",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"segment\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"segment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"PRIME\",\n        \"PRIVILEGE\"\n      ]\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"flag_main\",\n          \"login\",\n          \"orgId\",\n          \"role\",\n          \"status\",\n          \"statusId\",\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"ACCOUNT_MANAGER\",\n              \"ACCOUNT_MANAGER_PRIVILEGE\"\n            ]\n          },\n          \"flag_main\": {\n            \"type\": \"boolean\"\n          },\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneExt\": {\n            \"type\": \"string\"\n          },\n          \"orgId\": {\n            \"type\": \"string\"\n          },\n          \"orgName\": {\n            \"type\": \"string\"\n          },\n          \"orgAddress\": {\n            \"type\": \"string\"\n          },\n          \"statusId\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "GET /v2/ext/managers/{mdmId} — Основной и замещающий менеджеры клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getClientManagersByMdmId/v2/ext/managers/5300009718",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"role_in_team\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BROKER\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"remote_manager\": {\n            \"type\": \"boolean\"\n          },\n          \"is_main\": {\n            \"type\": \"boolean\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"target_date\": {\n            \"type\": \"string\"\n          },\n          \"shift_date\": {\n            \"type\": \"string\"\n          },\n          \"return_date\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"client\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"is_top\": {\n            \"type\": \"boolean\"\n          },\n          \"is_vip\": {\n            \"type\": \"boolean\"\n          },\n          \"service_group\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"org\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"id\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"status\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/supervisors — Супервизоры в точке продаж и отделении",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getSupervisorsByBranchId/v1/ext/supervisors?pos=3510",
+            "description": "Супервизоры в точке продаж и отделении"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"list\",\n    \"total\"\n  ],\n  \"properties\": {\n    \"list\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"departmentHierarchy\",\n          \"first_name\",\n          \"last_name\",\n          \"login\",\n          \"middle_name\",\n          \"org_address\",\n          \"org_id\",\n          \"org_name\",\n          \"org_timezone\",\n          \"org_workhours\",\n          \"tabnum\"\n        ],\n        \"properties\": {\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"departmentHierarchy\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"org_id\": {\n            \"type\": \"string\"\n          },\n          \"org_name\": {\n            \"type\": \"string\"\n          },\n          \"org_address\": {\n            \"type\": \"string\"\n          },\n          \"org_workhours\": {\n            \"type\": \"string\"\n          },\n          \"org_timezone\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"roles\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\",\n              \"enum\": [\n                \"SUPERVISOR\",\n                \"SUPERVISOR_PRIME\",\n                \"PERSONAL_MANAGER\",\n                \"PFM\",\n                \"PFM2\",\n                \"ACCOUNT_MANAGER\",\n                \"ACCOUNT_MANAGER_PRIVILEGE\"\n              ]\n            }\n          }\n        }\n      }\n    },\n    \"total\": {\n      \"type\": \"integer\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/serviceteam/{mdmId} — KO privilege",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getClientServiceTeamByMdmId/v1/ext/serviceteam/5301634913",
+            "description": "Метод возвращает КО заданного клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"segment\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"segment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"PRIME\",\n        \"PRIVILEGE\"\n      ]\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"flag_main\",\n          \"login\",\n          \"orgId\",\n          \"role\",\n          \"status\",\n          \"statusId\",\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"ACCOUNT_MANAGER\",\n              \"ACCOUNT_MANAGER_PRIVILEGE\"\n            ]\n          },\n          \"flag_main\": {\n            \"type\": \"boolean\"\n          },\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneExt\": {\n            \"type\": \"string\"\n          },\n          \"orgId\": {\n            \"type\": \"string\"\n          },\n          \"orgName\": {\n            \"type\": \"string\"\n          },\n          \"orgAddress\": {\n            \"type\": \"string\"\n          },\n          \"statusId\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/serviceteam/{mdmId} — КО prime",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getClientServiceTeamByMdmId/v1/ext/serviceteam/5301935361",
+            "description": "Метод возвращает КО заданного клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"segment\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"segment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"PRIME\",\n        \"PRIVILEGE\"\n      ]\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"flag_main\",\n          \"login\",\n          \"orgId\",\n          \"role\",\n          \"status\",\n          \"statusId\",\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"ACCOUNT_MANAGER\",\n              \"ACCOUNT_MANAGER_PRIVILEGE\"\n            ]\n          },\n          \"flag_main\": {\n            \"type\": \"boolean\"\n          },\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneExt\": {\n            \"type\": \"string\"\n          },\n          \"orgId\": {\n            \"type\": \"string\"\n          },\n          \"orgName\": {\n            \"type\": \"string\"\n          },\n          \"orgAddress\": {\n            \"type\": \"string\"\n          },\n          \"statusId\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/personalManagers/{mdmId} — ПФМ+ШИФТ ПРайм",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv_sofk/v1/ext/personalManagers/5300820904",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"tabnum\": {\n        \"type\": \"string\"\n      },\n      \"login\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      },\n      \"email\": {\n        \"type\": \"string\"\n      },\n      \"flag_main\": {\n        \"type\": \"boolean\"\n      },\n      \"org_id\": {\n        \"type\": \"string\"\n      },\n      \"org_name\": {\n        \"type\": \"string\"\n      },\n      \"org_address\": {\n        \"type\": \"string\"\n      },\n      \"org_workhours\": {\n        \"type\": \"string\"\n      },\n      \"org_timezone\": {\n        \"type\": \"string\"\n      },\n      \"status_id\": {\n        \"type\": \"integer\"\n      },\n      \"status\": {\n        \"type\": \"string\"\n      },\n      \"phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_ext\": {\n        \"type\": \"string\"\n      },\n      \"workhours\": {\n        \"type\": \"string\"\n      },\n      \"timezone\": {\n        \"type\": \"string\"\n      },\n      \"remote_manager\": {\n        \"type\": \"boolean\"\n      },\n      \"vip\": {\n        \"type\": \"boolean\"\n      },\n      \"top\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/personalManagers/{mdmId} — ПМ-ШИФТ прив",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv_sofk/v1/ext/personalManagers/5300454386",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"tabnum\": {\n        \"type\": \"string\"\n      },\n      \"login\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      },\n      \"email\": {\n        \"type\": \"string\"\n      },\n      \"flag_main\": {\n        \"type\": \"boolean\"\n      },\n      \"org_id\": {\n        \"type\": \"string\"\n      },\n      \"org_name\": {\n        \"type\": \"string\"\n      },\n      \"org_address\": {\n        \"type\": \"string\"\n      },\n      \"org_workhours\": {\n        \"type\": \"string\"\n      },\n      \"org_timezone\": {\n        \"type\": \"string\"\n      },\n      \"status_id\": {\n        \"type\": \"integer\"\n      },\n      \"status\": {\n        \"type\": \"string\"\n      },\n      \"phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_ext\": {\n        \"type\": \"string\"\n      },\n      \"workhours\": {\n        \"type\": \"string\"\n      },\n      \"timezone\": {\n        \"type\": \"string\"\n      },\n      \"remote_manager\": {\n        \"type\": \"boolean\"\n      },\n      \"vip\": {\n        \"type\": \"boolean\"\n      },\n      \"top\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/marks/{mdmId} — Метки и группа обслуживания клиента — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1141",
+                "type": "text"
+              }
+            ],
+            "url": "{{urlepa}}/ext/marks/5300745487",
+            "description": "Супервизоры в точке продаж и отделении"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"top\",\n    \"vip\",\n    \"supervip\",\n    \"ExOb\",\n    \"service_group\",\n    \"service_group_name\"\n  ],\n  \"properties\": {\n    \"top\": {\n      \"type\": \"boolean\"\n    },\n    \"vip\": {\n      \"type\": \"boolean\"\n    },\n    \"supervip\": {\n      \"type\": \"boolean\"\n    },\n    \"ExOb\": {\n      \"type\": \"boolean\"\n    },\n    \"service_group\": {\n      \"type\": \"string\"\n    },\n    \"service_group_name\": {\n      \"type\": \"string\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/managers/{mdmId} —ПМ+ШИФТ ПРИВ",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_6"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getClientManagersByMdmId/v1/ext/managers/5300454386",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"role_in_team\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BROKER\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"remote_manager\": {\n            \"type\": \"boolean\"\n          },\n          \"is_main\": {\n            \"type\": \"boolean\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"target_date\": {\n            \"type\": \"string\"\n          },\n          \"shift_date\": {\n            \"type\": \"string\"\n          },\n          \"return_date\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"client\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"is_top\": {\n            \"type\": \"boolean\"\n          },\n          \"is_vip\": {\n            \"type\": \"boolean\"\n          },\n          \"service_group\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"org\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"id\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"status\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/managers/{mdmId} —ПФМ+ШИФТ ПРАЙМ",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_6"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getClientManagersByMdmId/v1/ext/managers/5300820904",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"role_in_team\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BROKER\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"remote_manager\": {\n            \"type\": \"boolean\"\n          },\n          \"is_main\": {\n            \"type\": \"boolean\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"target_date\": {\n            \"type\": \"string\"\n          },\n          \"shift_date\": {\n            \"type\": \"string\"\n          },\n          \"return_date\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"client\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"is_top\": {\n            \"type\": \"boolean\"\n          },\n          \"is_vip\": {\n            \"type\": \"boolean\"\n          },\n          \"service_group\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"org\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"id\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"status\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/inn/{mdmId} — Получить список организаций у клиента — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/ext/inn/5300745487",
+            "description": "Получить список организаций у клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"inn\"\n    ],\n    \"properties\": {\n      \"inn\": {\n        \"type\": \"string\"\n      },\n      \"name\": {\n        \"type\": \"string\"\n      },\n      \"clientPosition\": {\n        \"type\": \"string\"\n      },\n      \"clientType\": {\n        \"type\": \"string\"\n      },\n      \"hasSalaryProject\": {\n        \"type\": \"boolean\"\n      },\n      \"isMain\": {\n        \"type\": \"boolean\"\n      },\n      \"segment\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/familyCircle/{mdmId} — Получить информацию о связанных через ПУ Семейный по mdmId клиента — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/ext/familyCircle/5300745487",
+            "description": "Получить информацию о связанных через ПУ Семейный по mdmId клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"mdmId\"\n    ],\n    \"properties\": {\n      \"mdmId\": {\n        \"type\": \"string\"\n      },\n      \"lastName\": {\n        \"type\": \"string\"\n      },\n      \"firstName\": {\n        \"type\": \"string\"\n      },\n      \"middleName\": {\n        \"type\": \"string\"\n      },\n      \"birthDate\": {\n        \"type\": \"string\"\n      },\n      \"relation\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/employee/by-tabnum/{tabnum} — Информация о сотруднике по табельному номеру",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getEmployeeByTubNum/v1/ext/employee/by-tabnum/92269481",
+            "description": "Информация о сотруднике по табельному номеру"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"isSupervisor\",\n    \"orgId\",\n    \"roles\"\n  ],\n  \"properties\": {\n    \"orgId\": {\n      \"type\": \"string\"\n    },\n    \"lastName\": {\n      \"type\": \"string\"\n    },\n    \"firstName\": {\n      \"type\": \"string\"\n    },\n    \"middleName\": {\n      \"type\": \"string\"\n    },\n    \"roles\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"SUPERVISOR\",\n          \"SUPERVISOR_PRIME\",\n          \"PERSONAL_MANAGER\",\n          \"PFM\",\n          \"PFM2\",\n          \"ACCOUNT_MANAGER\",\n          \"ACCOUNT_MANAGER_PRIVILEGE\"\n        ]\n      }\n    },\n    \"isSupervisor\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/customers/by-tabnum/{tabnum} — Все клиенты менеджера",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getClientsByPersonalManagerTubNum/v1/ext/customers/by-tabnum/00010041",
+            "description": "Все клиенты менеджера"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"client_segment\",\n      \"mdm_id\",\n      \"role_in_team\",\n      \"shifter\"\n    ],\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      },\n      \"client_segment\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"UNKNOWN\",\n          \"PRIME\",\n          \"PRIVILEGE\"\n        ]\n      },\n      \"role_in_team\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"PERSONAL_MANAGER\",\n          \"PFM\",\n          \"PFM2\",\n          \"BILL_ACCOUNTANT\"\n        ]\n      },\n      \"shifter\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/customers/by-login/{login} — Все клиенты менеджера — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/ext/customers/by-login/VTB4111477",
+            "description": "Все клиенты менеджера"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/branch/by-id/{id} — Данные по точке продаж",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getBranchInfoByBranchId/v1/ext/branch/by-id/1905",
+            "description": "Данные по точке продаж"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"supervisors\"\n  ],\n  \"properties\": {\n    \"supervisors\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    \"primes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    },\n    \"privileges\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/affiliates/{mdmId} — Получить список аффилированных лиц клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urlepa}}/api/rb/tbcv/getAffiliatesClientsByMdmId/v1/ext/affiliates/5300012958",
+            "description": "Получить список аффилированных лиц клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"mdmId\",\n      \"relativeName\"\n    ],\n    \"properties\": {\n      \"mdmId\": {\n        \"type\": \"string\"\n      },\n      \"lastName\": {\n        \"type\": \"string\"\n      },\n      \"firstName\": {\n        \"type\": \"string\"\n      },\n      \"middleName\": {\n        \"type\": \"string\"\n      },\n      \"birthDate\": {\n        \"type\": \"string\"\n      },\n      \"relativeName\": {\n        \"type\": \"string\"\n      },\n      \"specificRelation\": {\n        \"type\": \"string\"\n      },\n      \"isApproved\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TYK",
+      "item": [
+        {
+          "name": "POST /ext/kro/operation/members — Получение ФИО сотруднников участвующих в КРО",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urltyk}}/ext/kro/operation/members",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"login\": \"string\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"employee\",\n      \"login\"\n    ],\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"login\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролям(PM)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"VTB4111477\",\n  \"roles\": [\"PERSONAL_MANAGER\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientsByEmployeeLogin/v2/ext/customers/by-login-roles",
+            "description": "Все клиенты сотрудника по ролям"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/customers/by-login-roles — Все клиенты сотрудника по ролям PFM",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"VTB4111477\",\n  \"roles\": [\"PFM\"]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientsByEmployeeLogin/v2/ext/customers/by-login-roles",
+            "description": "Все клиенты сотрудника по ролям"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/client/serviceteam — Получение команды обслуживания клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urltyk}}/ext/client/serviceteam",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mdmId\": \"5300745487\",\n  \"needActualization\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"customer\",\n    \"isExOb\",\n    \"isSuperVip\",\n    \"isTop\",\n    \"isVip\",\n    \"serviceGroup\",\n    \"servicePack\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"customer\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"properties\": {\n        \"mdm_id\": {\n          \"type\": \"string\"\n        },\n        \"last_name\": {\n          \"type\": \"string\"\n        },\n        \"first_name\": {\n          \"type\": \"string\"\n        },\n        \"middle_name\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"servicePack\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"properties\": {\n        \"name\": {\n          \"type\": \"string\"\n        },\n        \"type\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"UNKNOWN\",\n            \"PRIME\",\n            \"RETAIL\",\n            \"PRIVILEGE\"\n          ]\n        }\n      }\n    },\n    \"isVip\": {\n      \"type\": \"boolean\"\n    },\n    \"isTop\": {\n      \"type\": \"boolean\"\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"role\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"PERSONAL_MANAGER\",\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"branch\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"code\": {\n                \"type\": \"string\"\n              },\n              \"name\": {\n                \"type\": \"string\"\n              },\n              \"address\": {\n                \"type\": \"string\"\n              },\n              \"types\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"properties\": {\n                  \"present\": {\n                    \"type\": \"boolean\"\n                  }\n                }\n              }\n            }\n          },\n          \"manager\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"required\": [\n              \"firstName\",\n              \"id\",\n              \"lastName\",\n              \"middleName\"\n            ],\n            \"properties\": {\n              \"id\": {\n                \"type\": \"integer\"\n              },\n              \"lastName\": {\n                \"type\": \"string\"\n              },\n              \"firstName\": {\n                \"type\": \"string\"\n              },\n              \"middleName\": {\n                \"type\": \"string\"\n              },\n              \"phoneNum\": {\n                \"type\": \"string\"\n              },\n              \"workPhoneNum\": {\n                \"type\": \"string\"\n              },\n              \"workPhoneExt\": {\n                \"type\": \"string\"\n              }\n            }\n          },\n          \"shift\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"required\": [\n              \"manager\"\n            ],\n            \"properties\": {\n              \"manager\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"required\": [\n                  \"firstName\",\n                  \"id\",\n                  \"lastName\",\n                  \"middleName\"\n                ],\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"lastName\": {\n                    \"type\": \"string\"\n                  },\n                  \"firstName\": {\n                    \"type\": \"string\"\n                  },\n                  \"middleName\": {\n                    \"type\": \"string\"\n                  },\n                  \"phoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneExt\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"shiftDateFrom\": {\n                \"type\": \"string\"\n              },\n              \"shiftDateTo\": {\n                \"type\": \"string\"\n              },\n              \"reason\": {\n                \"type\": \"string\"\n              }\n            }\n          }\n        }\n      }\n    },\n    \"serviceGroup\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"required\": [\n        \"kind\"\n      ],\n      \"properties\": {\n        \"id\": {\n          \"type\": \"integer\"\n        },\n        \"kind\": {\n          \"type\": \"string\",\n          \"enum\": [\n            \"UNASSIGNED\",\n            \"PRIME\",\n            \"AFFILIATE\",\n            \"TEMPORARY_AGREEMENT\",\n            \"TOP_AFFLUENT\",\n            \"ELSE\"\n          ]\n        }\n      }\n    },\n    \"tempAgreementExpirationDate\": {\n      \"type\": \"string\"\n    },\n    \"isExOb\": {\n      \"type\": \"boolean\"\n    },\n    \"isSuperVip\": {\n      \"type\": \"boolean\"\n    },\n    \"company\": {\n      \"type\": \"string\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/client/serviceteam/history/list — Получение истории изменения команды обслуживания клиента — Variant 1",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urltyk}}/ext/client/serviceteam/history/list",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": 1,\n  \"page\": 1,\n  \"pageSize\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"list\"\n  ],\n  \"properties\": {\n    \"list\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"comment\",\n          \"datetime\",\n          \"type\"\n        ],\n        \"properties\": {\n          \"datetime\": {\n            \"type\": \"string\"\n          },\n          \"type\": {\n            \"type\": \"string\"\n          },\n          \"comment\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"additionalProperties\": true,\n              \"required\": [\n                \"name\",\n                \"value\"\n              ],\n              \"properties\": {\n                \"name\": {\n                  \"type\": \"string\"\n                },\n                \"value\": {\n                  \"type\": \"string\"\n                }\n              }\n            }\n          },\n          \"requester\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"properties\": {\n              \"employee\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"required\": [\n                  \"firstName\",\n                  \"id\",\n                  \"lastName\",\n                  \"middleName\"\n                ],\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"lastName\": {\n                    \"type\": \"string\"\n                  },\n                  \"firstName\": {\n                    \"type\": \"string\"\n                  },\n                  \"middleName\": {\n                    \"type\": \"string\"\n                  },\n                  \"phoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneExt\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"branch\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"code\": {\n                    \"type\": \"string\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  },\n                  \"address\": {\n                    \"type\": \"string\"\n                  },\n                  \"types\": {\n                    \"type\": \"object\",\n                    \"additionalProperties\": true,\n                    \"properties\": {\n                      \"present\": {\n                        \"type\": \"boolean\"\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"aggregates\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"required\": [\n        \"total\"\n      ],\n      \"properties\": {\n        \"total\": {\n          \"type\": \"integer\"\n        },\n        \"sortableFields\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/client/serviceteam/history/list — Получение истории изменения команды обслуживания клиента — Variant 2",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "url": "{{urltyk}}/ext/client/serviceteam/history/list",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": 1,\n  \"page\": 1,\n  \"pageSize\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"list\"\n  ],\n  \"properties\": {\n    \"list\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"comment\",\n          \"datetime\",\n          \"type\"\n        ],\n        \"properties\": {\n          \"datetime\": {\n            \"type\": \"string\"\n          },\n          \"type\": {\n            \"type\": \"string\"\n          },\n          \"comment\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"additionalProperties\": true,\n              \"required\": [\n                \"name\",\n                \"value\"\n              ],\n              \"properties\": {\n                \"name\": {\n                  \"type\": \"string\"\n                },\n                \"value\": {\n                  \"type\": \"string\"\n                }\n              }\n            }\n          },\n          \"requester\": {\n            \"type\": \"object\",\n            \"additionalProperties\": true,\n            \"properties\": {\n              \"employee\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"required\": [\n                  \"firstName\",\n                  \"id\",\n                  \"lastName\",\n                  \"middleName\"\n                ],\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"lastName\": {\n                    \"type\": \"string\"\n                  },\n                  \"firstName\": {\n                    \"type\": \"string\"\n                  },\n                  \"middleName\": {\n                    \"type\": \"string\"\n                  },\n                  \"phoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneNum\": {\n                    \"type\": \"string\"\n                  },\n                  \"workPhoneExt\": {\n                    \"type\": \"string\"\n                  }\n                }\n              },\n              \"branch\": {\n                \"type\": \"object\",\n                \"additionalProperties\": true,\n                \"properties\": {\n                  \"id\": {\n                    \"type\": \"integer\"\n                  },\n                  \"code\": {\n                    \"type\": \"string\"\n                  },\n                  \"name\": {\n                    \"type\": \"string\"\n                  },\n                  \"address\": {\n                    \"type\": \"string\"\n                  },\n                  \"types\": {\n                    \"type\": \"object\",\n                    \"additionalProperties\": true,\n                    \"properties\": {\n                      \"present\": {\n                        \"type\": \"boolean\"\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    \"aggregates\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"required\": [\n        \"total\"\n      ],\n      \"properties\": {\n        \"total\": {\n          \"type\": \"integer\"\n        },\n        \"sortableFields\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "POST /ext/client/card/access/by-login — Предоставить для сотрудника безверификационный доступ к клиенту — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mdmId\": \"5301797333\",\n  \"login\": \"VTB4111477\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urltyk}}/ext/client/card/access/by-login",
+            "description": "Предоставить для сотрудника безверификационный доступ к клиенту"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 201\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"customer\",\n    \"serviceTeam\"\n  ],\n  \"properties\": {\n    \"customer\": {\n      \"type\": \"object\",\n      \"additionalProperties\": true,\n      \"properties\": {\n        \"lastName\": {\n          \"type\": \"string\"\n        },\n        \"firstName\": {\n          \"type\": \"string\"\n        },\n        \"middleName\": {\n          \"type\": \"string\"\n        },\n        \"branchExtCode\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"serviceTeam\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"firstName\",\n          \"lastName\",\n          \"role\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"PERSONAL_MANAGER\",\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "POST /ext/check/personalManager — труе ТП одна",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"isAllowed\"\n  ],\n  \"properties\": {\n    \"isAllowed\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "",
+                  "// Existing business checks from source collection:",
+                  "let json = pm.response.json();",
+                  "pm.test(\"isAllowed\" === true, function() {",
+                  "    pm.expect(json.isAllowed).to.eql(true);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"1073537212\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/checkEmployeeAndCustomerBranch/v2/ext/check/personalManager",
+            "description": "Проверить возможности получения данных в карточке сотрудника"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /ext/check/personalManager — false (разные тП)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"isAllowed\"\n  ],\n  \"properties\": {\n    \"isAllowed\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});",
+                  "",
+                  "// Existing business checks from source collection:",
+                  "let json = pm.response.json();",
+                  "pm.test(\"isAllowed\" === false, function() {",
+                  "    pm.expect(json.isAllowed).to.eql(false);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login\": \"VTB4090196\",\n  \"mdm_id\": \"5300560047\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/checkEmployeeAndCustomerBranch/v2/ext/check/personalManager",
+            "description": "Проверить возможности получения данных в карточке сотрудника"
+          },
+          "response": []
+        },
+        {
+          "name": "POST /ext/affiliate/add — добавление клиента в список аффилированных лиц",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"mdmId\",\n    \"relativeName\"\n  ],\n  \"properties\": {\n    \"mdmId\": {\n      \"type\": \"string\"\n    },\n    \"lastName\": {\n      \"type\": \"string\"\n    },\n    \"firstName\": {\n      \"type\": \"string\"\n    },\n    \"middleName\": {\n      \"type\": \"string\"\n    },\n    \"birthDate\": {\n      \"type\": \"string\"\n    },\n    \"relativeName\": {\n      \"type\": \"string\"\n    },\n    \"specificRelation\": {\n      \"type\": \"string\"\n    },\n    \"isApproved\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"masterMdmId\": \"5300745487\",\n    \"affiliateMdmId\": \"{{mdm_client}}\",\n    \"relativeId\": 4,\n    \"specificRelation\": \"артема друг брат коллега\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/addAffiliateClient/v1/ext/affiliate/add",
+            "description": "добавление клиента в список аффилированных лиц"
+          },
+          "response": []
+        },
+        {
+          "name": "GET /v2/ext/serviceteam/{mdmId} — Метод возвращает КО заданного клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": "{{urltyk}}/v2/ext/serviceteam/5300745487",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ]
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"segment\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"segment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"PRIME\",\n        \"PRIVILEGE\"\n      ]\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"flag_main\",\n          \"login\",\n          \"orgId\",\n          \"role\",\n          \"status\",\n          \"statusId\",\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"ACCOUNT_MANAGER\",\n              \"ACCOUNT_MANAGER_PRIVILEGE\"\n            ]\n          },\n          \"flag_main\": {\n            \"type\": \"boolean\"\n          },\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneExt\": {\n            \"type\": \"string\"\n          },\n          \"orgId\": {\n            \"type\": \"string\"\n          },\n          \"orgName\": {\n            \"type\": \"string\"\n          },\n          \"orgAddress\": {\n            \"type\": \"string\"\n          },\n          \"statusId\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "GET /v2/ext/managers/{mdmId} — Основной и замещающий менеджеры клиента — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urltyk}}/v2/ext/managers/5300745487",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"role_in_team\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BROKER\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"remote_manager\": {\n            \"type\": \"boolean\"\n          },\n          \"is_main\": {\n            \"type\": \"boolean\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"target_date\": {\n            \"type\": \"string\"\n          },\n          \"shift_date\": {\n            \"type\": \"string\"\n          },\n          \"return_date\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"client\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"is_top\": {\n            \"type\": \"boolean\"\n          },\n          \"is_vip\": {\n            \"type\": \"boolean\"\n          },\n          \"service_group\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"org\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"id\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"status\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/supervisors — Супервизоры в точке продаж и отделении",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getSupervisorsByBranchId/v2/ext/supervisors?departmentId=00011793&pos=3510",
+            "description": "Супервизоры в точке продаж и отделении"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"list\",\n    \"total\"\n  ],\n  \"properties\": {\n    \"list\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"departmentHierarchy\",\n          \"first_name\",\n          \"last_name\",\n          \"login\",\n          \"middle_name\",\n          \"org_address\",\n          \"org_id\",\n          \"org_name\",\n          \"org_timezone\",\n          \"org_workhours\",\n          \"tabnum\"\n        ],\n        \"properties\": {\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"departmentHierarchy\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\"\n            }\n          },\n          \"org_id\": {\n            \"type\": \"string\"\n          },\n          \"org_name\": {\n            \"type\": \"string\"\n          },\n          \"org_address\": {\n            \"type\": \"string\"\n          },\n          \"org_workhours\": {\n            \"type\": \"string\"\n          },\n          \"org_timezone\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"roles\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"string\",\n              \"enum\": [\n                \"SUPERVISOR\",\n                \"SUPERVISOR_PRIME\",\n                \"PERSONAL_MANAGER\",\n                \"PFM\",\n                \"PFM2\",\n                \"ACCOUNT_MANAGER\",\n                \"ACCOUNT_MANAGER_PRIVILEGE\"\n              ]\n            }\n          }\n        }\n      }\n    },\n    \"total\": {\n      \"type\": \"integer\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/serviceteam/{mdmId} — Метод возвращает КО PRIV",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientServiceTeamByMdmId/v3/ext/serviceteam/1233630524",
+            "description": "Метод возвращает КО заданного клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"segment\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"segment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"PRIME\",\n        \"PRIVILEGE\"\n      ]\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"flag_main\",\n          \"login\",\n          \"orgId\",\n          \"role\",\n          \"status\",\n          \"statusId\",\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"ACCOUNT_MANAGER\",\n              \"ACCOUNT_MANAGER_PRIVILEGE\"\n            ]\n          },\n          \"flag_main\": {\n            \"type\": \"boolean\"\n          },\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneExt\": {\n            \"type\": \"string\"\n          },\n          \"orgId\": {\n            \"type\": \"string\"\n          },\n          \"orgName\": {\n            \"type\": \"string\"\n          },\n          \"orgAddress\": {\n            \"type\": \"string\"\n          },\n          \"statusId\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/serviceteam/{mdmId} — Метод возвращает КО PRiME",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientServiceTeamByMdmId/v3/ext/serviceteam/5301614758",
+            "description": "Метод возвращает КО заданного клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"segment\",\n    \"team\"\n  ],\n  \"properties\": {\n    \"segment\": {\n      \"type\": \"string\",\n      \"enum\": [\n        \"PRIME\",\n        \"PRIVILEGE\"\n      ]\n    },\n    \"team\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"flag_main\",\n          \"login\",\n          \"orgId\",\n          \"role\",\n          \"status\",\n          \"statusId\",\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"role\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"ACCOUNT_MANAGER\",\n              \"ACCOUNT_MANAGER_PRIVILEGE\"\n            ]\n          },\n          \"flag_main\": {\n            \"type\": \"boolean\"\n          },\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneNum\": {\n            \"type\": \"string\"\n          },\n          \"workPhoneExt\": {\n            \"type\": \"string\"\n          },\n          \"orgId\": {\n            \"type\": \"string\"\n          },\n          \"orgName\": {\n            \"type\": \"string\"\n          },\n          \"orgAddress\": {\n            \"type\": \"string\"\n          },\n          \"statusId\": {\n            \"type\": \"integer\"\n          },\n          \"status\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/personalManagers/{mdmId} — Основной и замещающий менеджеры клиента — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urltyk}}/ext/personalManagers/5300745487",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"tabnum\": {\n        \"type\": \"string\"\n      },\n      \"login\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      },\n      \"email\": {\n        \"type\": \"string\"\n      },\n      \"flag_main\": {\n        \"type\": \"boolean\"\n      },\n      \"org_id\": {\n        \"type\": \"string\"\n      },\n      \"org_name\": {\n        \"type\": \"string\"\n      },\n      \"org_address\": {\n        \"type\": \"string\"\n      },\n      \"org_workhours\": {\n        \"type\": \"string\"\n      },\n      \"org_timezone\": {\n        \"type\": \"string\"\n      },\n      \"status_id\": {\n        \"type\": \"integer\"\n      },\n      \"status\": {\n        \"type\": \"string\"\n      },\n      \"phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_ext\": {\n        \"type\": \"string\"\n      },\n      \"workhours\": {\n        \"type\": \"string\"\n      },\n      \"timezone\": {\n        \"type\": \"string\"\n      },\n      \"remote_manager\": {\n        \"type\": \"boolean\"\n      },\n      \"vip\": {\n        \"type\": \"boolean\"\n      },\n      \"top\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/personalManagers/{mdmId} — Основной и замещающий менеджеры клиента — URL synthesized",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urltyk}}/ext/personalManagers/5300745487",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"tabnum\": {\n        \"type\": \"string\"\n      },\n      \"login\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      },\n      \"email\": {\n        \"type\": \"string\"\n      },\n      \"flag_main\": {\n        \"type\": \"boolean\"\n      },\n      \"org_id\": {\n        \"type\": \"string\"\n      },\n      \"org_name\": {\n        \"type\": \"string\"\n      },\n      \"org_address\": {\n        \"type\": \"string\"\n      },\n      \"org_workhours\": {\n        \"type\": \"string\"\n      },\n      \"org_timezone\": {\n        \"type\": \"string\"\n      },\n      \"status_id\": {\n        \"type\": \"integer\"\n      },\n      \"status\": {\n        \"type\": \"string\"\n      },\n      \"phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_num\": {\n        \"type\": \"string\"\n      },\n      \"work_phone_ext\": {\n        \"type\": \"string\"\n      },\n      \"workhours\": {\n        \"type\": \"string\"\n      },\n      \"timezone\": {\n        \"type\": \"string\"\n      },\n      \"remote_manager\": {\n        \"type\": \"boolean\"\n      },\n      \"vip\": {\n        \"type\": \"boolean\"\n      },\n      \"top\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET / Получить метки по МДМ айди  ext/marks/{mdmId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1141",
+                "type": "text"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientMarksByMdmId/v1/ext/marks/5300745487",
+            "description": "Супервизоры в точке продаж и отделении"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"top\",\n    \"vip\",\n    \"supervip\",\n    \"ExOb\",\n    \"service_group\",\n    \"service_group_name\"\n  ],\n  \"properties\": {\n    \"top\": {\n      \"type\": \"boolean\"\n    },\n    \"vip\": {\n      \"type\": \"boolean\"\n    },\n    \"supervip\": {\n      \"type\": \"boolean\"\n    },\n    \"ExOb\": {\n      \"type\": \"boolean\"\n    },\n    \"service_group\": {\n      \"type\": \"string\"\n    },\n    \"service_group_name\": {\n      \"type\": \"string\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/managers/{mdmId} — Основной и замещающий менеджеры клиента(PRIME)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientManagersByMdmId/v3/ext/managers/2161141075",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"role_in_team\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BROKER\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"remote_manager\": {\n            \"type\": \"boolean\"\n          },\n          \"is_main\": {\n            \"type\": \"boolean\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"target_date\": {\n            \"type\": \"string\"\n          },\n          \"shift_date\": {\n            \"type\": \"string\"\n          },\n          \"return_date\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"client\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"is_top\": {\n            \"type\": \"boolean\"\n          },\n          \"is_vip\": {\n            \"type\": \"boolean\"\n          },\n          \"service_group\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"org\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"id\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"status\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/managers/{mdmId} — Основной и замещающий менеджеры клиента(PRIME) Copy",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Initiator-Service",
+                "value": "1447_5"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientManagersByMdmId/v3/ext/managers/5301634913",
+            "description": "Основной и замещающий менеджеры клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"employee\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"last_name\": {\n            \"type\": \"string\"\n          },\n          \"first_name\": {\n            \"type\": \"string\"\n          },\n          \"middle_name\": {\n            \"type\": \"string\"\n          },\n          \"login\": {\n            \"type\": \"string\"\n          },\n          \"tabnum\": {\n            \"type\": \"string\"\n          },\n          \"role_in_team\": {\n            \"type\": \"string\",\n            \"enum\": [\n              \"SUPERVISOR\",\n              \"SUPERVISOR_PRIME\",\n              \"PERSONAL_MANAGER\",\n              \"PFM\",\n              \"PFM2\",\n              \"BILL_ACCOUNTANT\",\n              \"BROKER\",\n              \"BILL_ACCOUNTANT_PRIVILEGE\"\n            ]\n          },\n          \"remote_manager\": {\n            \"type\": \"boolean\"\n          },\n          \"is_main\": {\n            \"type\": \"boolean\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          },\n          \"phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_num\": {\n            \"type\": \"string\"\n          },\n          \"work_phone_ext\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"target_date\": {\n            \"type\": \"string\"\n          },\n          \"shift_date\": {\n            \"type\": \"string\"\n          },\n          \"return_date\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"client\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"is_top\": {\n            \"type\": \"boolean\"\n          },\n          \"is_vip\": {\n            \"type\": \"boolean\"\n          },\n          \"service_group\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"org\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"id\": {\n            \"type\": \"string\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          },\n          \"timezone\": {\n            \"type\": \"string\"\n          },\n          \"workhours\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"status\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"properties\": {\n          \"id\": {\n            \"type\": \"integer\"\n          },\n          \"name\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/inn/{mdmId} — Получить список организаций у клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getInnByMdmId/v1/ext/inn/5300975391",
+            "description": "Получить список организаций у клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"inn\"\n    ],\n    \"properties\": {\n      \"inn\": {\n        \"type\": \"string\"\n      },\n      \"name\": {\n        \"type\": \"string\"\n      },\n      \"clientPosition\": {\n        \"type\": \"string\"\n      },\n      \"clientType\": {\n        \"type\": \"string\"\n      },\n      \"hasSalaryProject\": {\n        \"type\": \"boolean\"\n      },\n      \"isMain\": {\n        \"type\": \"boolean\"\n      },\n      \"segment\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/familyCircle/{mdmId} — Получить информацию о связанных через ПУ Семейный по mdmId клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getFamilyCircleClientsByMdmId/v1/ext/familyCircle/5301163469",
+            "description": "Получить информацию о связанных через ПУ Семейный по mdmId клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"mdmId\"\n    ],\n    \"properties\": {\n      \"mdmId\": {\n        \"type\": \"string\"\n      },\n      \"lastName\": {\n        \"type\": \"string\"\n      },\n      \"firstName\": {\n        \"type\": \"string\"\n      },\n      \"middleName\": {\n        \"type\": \"string\"\n      },\n      \"birthDate\": {\n        \"type\": \"string\"\n      },\n      \"relation\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/employee/by-tabnum/{tabnum} — Информация о сотруднике по табельному номеру",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getEmployeeByTubNum/v2/ext/employee/by-tabnum/09923664",
+            "description": "Информация о сотруднике по табельному номеру"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"isSupervisor\",\n    \"orgId\",\n    \"roles\"\n  ],\n  \"properties\": {\n    \"orgId\": {\n      \"type\": \"string\"\n    },\n    \"lastName\": {\n      \"type\": \"string\"\n    },\n    \"firstName\": {\n      \"type\": \"string\"\n    },\n    \"middleName\": {\n      \"type\": \"string\"\n    },\n    \"roles\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"SUPERVISOR\",\n          \"SUPERVISOR_PRIME\",\n          \"PERSONAL_MANAGER\",\n          \"PFM\",\n          \"PFM2\",\n          \"ACCOUNT_MANAGER\",\n          \"ACCOUNT_MANAGER_PRIVILEGE\"\n        ]\n      }\n    },\n    \"isSupervisor\": {\n      \"type\": \"boolean\"\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/customers/by-tabnum/{tabnum} — Все клиенты менеджера",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getEmployeeByTubNum/v2/ext/employee/by-tabnum/00016487",
+            "description": "Все клиенты менеджера"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"client_segment\",\n      \"mdm_id\",\n      \"role_in_team\",\n      \"shifter\"\n    ],\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      },\n      \"client_segment\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"UNKNOWN\",\n          \"PRIME\",\n          \"PRIVILEGE\"\n        ]\n      },\n      \"role_in_team\": {\n        \"type\": \"string\",\n        \"enum\": [\n          \"PERSONAL_MANAGER\",\n          \"PFM\",\n          \"PFM2\",\n          \"BILL_ACCOUNTANT\"\n        ]\n      },\n      \"shifter\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/customers/by-login/{login} — Все клиенты менеджера",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getClientsByPersonalManagerLogin/v2/ext/customers/by-login/VTB4111477",
+            "description": "Все клиенты менеджера"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"properties\": {\n      \"mdm_id\": {\n        \"type\": \"string\"\n      },\n      \"last_name\": {\n        \"type\": \"string\"\n      },\n      \"first_name\": {\n        \"type\": \"string\"\n      },\n      \"middle_name\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/branch/by-id/{id} — Данные по точке продаж",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getBranchInfoByBranchId/v2/ext/branch/by-id/959501",
+            "description": "Данные по точке продаж"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"object\",\n  \"additionalProperties\": true,\n  \"required\": [\n    \"supervisors\"\n  ],\n  \"properties\": {\n    \"supervisors\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"additionalProperties\": true,\n        \"required\": [\n          \"tabNum\"\n        ],\n        \"properties\": {\n          \"tabNum\": {\n            \"type\": \"string\"\n          },\n          \"lastName\": {\n            \"type\": \"string\"\n          },\n          \"firstName\": {\n            \"type\": \"string\"\n          },\n          \"middleName\": {\n            \"type\": \"string\"\n          },\n          \"email\": {\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    \"primes\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    },\n    \"privileges\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET /ext/affiliates/{mdmId} — Получить список аффилированных лиц клиента",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{Tepa}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{urltyk}}/inside/public/app/publicapi/rb/tbcv/getAffiliatesClientsByMdmId/v2/ext/affiliates/5300745487",
+            "description": "Получить список аффилированных лиц клиента"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP status 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\",\n    \"additionalProperties\": true,\n    \"required\": [\n      \"mdmId\",\n      \"relativeName\"\n    ],\n    \"properties\": {\n      \"mdmId\": {\n        \"type\": \"string\"\n      },\n      \"lastName\": {\n        \"type\": \"string\"\n      },\n      \"firstName\": {\n        \"type\": \"string\"\n      },\n      \"middleName\": {\n        \"type\": \"string\"\n      },\n      \"birthDate\": {\n        \"type\": \"string\"\n      },\n      \"relativeName\": {\n        \"type\": \"string\"\n      },\n      \"specificRelation\": {\n        \"type\": \"string\"\n      },\n      \"isApproved\": {\n        \"type\": \"boolean\"\n      }\n    }\n  }\n};",
+                  "",
+                  "pm.test(\"JSON Schema: required fields and types from Swagger\", function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{Tepa}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "console.log('Запрос токена в EPA...');",
+          "const tokenRequest = {",
+          "    url: 'https://epa-am-if-lb.test.vtb.ru/passport/oauth2/token',",
+          "    method: 'POST',",
+          "    header: [",
+          "        { key: 'X-TYK-API-KEY', value: 'eyJvcmciOiI2MDA1OTE4MmQ4N2NiYzQ2OGI2NWJiYTEiLCJpZCI6InNvZmtfazRAcmVnaw9uLnZ0Yi5ydSIsImgiOiJtdXJtdXIzMiJ9' },",
+          "        { key: 'User-Agent', value: 'PostmanRuntime/7.26.8' },",
+          "        { key: 'Accept', value: '*/*' },",
+          "        { key: 'Accept-Encoding', value: 'gzip, deflate, br' },",
+          "        { key: 'Connection', value: 'keep-alive' },",
+          "        { key: 'Content-Type', value: 'application/x-www-form-urlencoded' },",
+          "        { key: 'Cache-Control', value: 'no-cache' }",
+          "    ],",
+          "    body: {",
+          "        mode: 'urlencoded',",
+          "        urlencoded: [",
+          "            { key: 'client_secret', value: '+5UloZrrACssc2!d', type: 'text' },",
+          "            { key: 'grant_type', value: 'client_credentials', type: 'text' },",
+          "            { key: 'client_id', value: 'tbcv_sofk_ift@app.b2c.vtb.ru', type: 'text' }",
+          "        ]",
+          "    }",
+          "};",
+          "pm.sendRequest(tokenRequest, function (err, res) {",
+          "    if (err) { console.log('Ошибка при запросе токена:', err); return; }",
+          "    let data;",
+          "    try { data = res.json(); } catch (e) { console.log('Ошибка парсинга JSON токена:', e); return; }",
+          "    if (data && data.access_token) {",
+          "        pm.collectionVariables.set('Tepa', data.access_token);",
+          "        pm.environment.set('Tepa', data.access_token);",
+          "        console.log('Токен сохранён в Tepa');",
+          "    } else {",
+          "        console.log('В ответе токена нет access_token:', data);",
+          "    }",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "urltyk",
+      "value": "https://iftyk-gw-lan-main-lb.test.vtb.ru"
+    },
+    {
+      "key": "urlepa",
+      "value": "https://epa-ig-if-lb.test.vtb.ru"
+    },
+    {
+      "key": "Tepa",
+      "value": ""
+    }
+  ]
+}
