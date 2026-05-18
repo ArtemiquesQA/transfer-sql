@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "required": [
+    "affiiates"
+  ],
+  "properties": {
+    "affiiates": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "required": [
+          "customerId",
+          "isFamily",
+          "mdmId"
+        ],
+        "properties": {
+          "mdmId": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 40
+          },
+          "customerId": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9223372036854775807
+          },
+          "isFamily": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

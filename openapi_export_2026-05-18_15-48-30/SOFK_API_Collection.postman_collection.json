@@ -1,0 +1,898 @@
+{
+  "info": {
+    "name": "Generated OpenAPI Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru"
+    },
+    {
+      "key": "bearerToken",
+      "value": ".eyJzdWIiOiJ2dGI0MTExNDc3QHRlc3QudnRiLnJ1IiwiY2hhbm5lbCI6ImNoYW5uZWwifQ=="
+    },
+    {
+      "key": "kind",
+      "value": "ALL"
+    },
+    {
+      "key": "customerId",
+      "value": "1"
+    },
+    {
+      "key": "mdmId",
+      "value": "1"
+    },
+    {
+      "key": "employeeId",
+      "value": "1"
+    },
+    {
+      "key": "role",
+      "value": "PERSONAL_MANAGER"
+    }
+  ],
+  "item": [
+    {
+      "name": "affiliate-invitation-controller",
+      "item": [
+        {
+          "name": "affiliateInvitationApprove — POST /vtbo/prime_invitation/approve",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/prime_invitation/approve",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": false,\n  \"externalId\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// No 200 response schema found in OpenAPI."
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "getAffiliateInvitation — POST /vtbo/affiliate_invitation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/affiliate_invitation",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"masterInfo\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"masterInfo\": {",
+                  "      \"type\": \"object\",",
+                  "      \"required\": [",
+                  "        \"firstName\",",
+                  "        \"lastName\"",
+                  "      ],",
+                  "      \"properties\": {",
+                  "        \"lastName\": {",
+                  "          \"type\": \"string\",",
+                  "          \"minLength\": 0,",
+                  "          \"maxLength\": 50",
+                  "        },",
+                  "        \"firstName\": {",
+                  "          \"type\": \"string\",",
+                  "          \"minLength\": 0,",
+                  "          \"maxLength\": 50",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "affiliateInvitationAdd — POST /vtbo/affiliate_invitation/add",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/affiliate_invitation/add",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"affiliateMdmId\": \"string\",\n  \"familyInvitation\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"properties\": {}",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "countInvitationCheck — GET /vtbo/count_invitation/check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/count_invitation/check",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"isAllowed\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"isAllowed\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "affiliatesCounterList — GET /vtbo/aff_counter/list",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/aff_counter/list",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"properties\": {}",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "inner-circle-controller",
+      "item": [
+        {
+          "name": "innerCircleCheckByCustomer — POST /vtbo/inner_circle/check/by_customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/inner_circle/check/by_customer",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"isAffiliateCheck\": false,\n  \"isMasterCheck\": false,\n  \"mdmId\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"isMaster\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"isMaster\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "masterFamilyCheck — GET /vtbo/master/family/check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/master/family/check",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"customerId\",",
+                  "    \"isFamily\",",
+                  "    \"masterMdmId\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"masterMdmId\": {",
+                  "      \"type\": \"string\",",
+                  "      \"minLength\": 0,",
+                  "      \"maxLength\": 40",
+                  "    },",
+                  "    \"customerId\": {",
+                  "      \"type\": \"integer\",",
+                  "      \"minimum\": 1,",
+                  "      \"maximum\": 9223372036854775807",
+                  "    },",
+                  "    \"isFamily\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "innerCircleMember — GET /vtbo/inner_circle/member",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/inner_circle/member",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"isMaster\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"isMaster\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "innerCircleCheck — GET /vtbo/inner_circle/check/{affiliate_id}",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/inner_circle/check/{{affiliate_id}}",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"isAllowed\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"isAllowed\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "affiliateFamilyCheck — GET /vtbo/affiliate/family/check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/affiliate/family/check",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"affiiates\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"affiiates\": {",
+                  "      \"type\": \"array\",",
+                  "      \"minItems\": 0,",
+                  "      \"maxItems\": 200,",
+                  "      \"items\": {",
+                  "        \"type\": \"object\",",
+                  "        \"required\": [",
+                  "          \"customerId\",",
+                  "          \"isFamily\",",
+                  "          \"mdmId\"",
+                  "        ],",
+                  "        \"properties\": {",
+                  "          \"mdmId\": {",
+                  "            \"type\": \"string\",",
+                  "            \"minLength\": 0,",
+                  "            \"maxLength\": 40",
+                  "          },",
+                  "          \"customerId\": {",
+                  "            \"type\": \"integer\",",
+                  "            \"minimum\": 1,",
+                  "            \"maximum\": 9223372036854775807",
+                  "          },",
+                  "          \"isFamily\": {",
+                  "            \"type\": \"boolean\"",
+                  "          }",
+                  "        }",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "primeRemoveAffiliateVtbo — DELETE /vtbo/prime/affiliate",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/prime/affiliate",
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// No 200 response schema found in OpenAPI."
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "customer-controller",
+      "item": [
+        {
+          "name": "getCustomersByCustomerId — POST /vtbo/customers/by_customer_id",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/customers/by_customer_id",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"array\",",
+                  "  \"items\": {",
+                  "    \"type\": \"object\",",
+                  "    \"required\": [",
+                  "      \"firstName\",",
+                  "      \"lastName\"",
+                  "    ],",
+                  "    \"properties\": {",
+                  "      \"lastName\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 0,",
+                  "        \"maxLength\": 50",
+                  "      },",
+                  "      \"firstName\": {",
+                  "        \"type\": \"string\",",
+                  "        \"minLength\": 0,",
+                  "        \"maxLength\": 50",
+                  "      }",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "customerServicepack — POST /vtbo/customer/servicepack",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/customer/servicepack",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"properties\": {}",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "customerProspect — POST /vtbo/customer/prospect/check",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/customer/prospect/check",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mdmId\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"isProspect\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"isProspect\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "getCustomerByMdmId — POST /vtbo/customer/by_mdm_id",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/customer/by_mdm_id",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"firstName\",",
+                  "    \"lastName\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"lastName\": {",
+                  "      \"type\": \"string\",",
+                  "      \"minLength\": 0,",
+                  "      \"maxLength\": 50",
+                  "    },",
+                  "    \"firstName\": {",
+                  "      \"type\": \"string\",",
+                  "      \"minLength\": 0,",
+                  "      \"maxLength\": 50",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invitation-change-sofk-controller",
+      "item": [
+        {
+          "name": "countInvitationApproveCheck — POST /vtbo/count_invitation/approve/check",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/count_invitation/approve/check",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"affInvId\": 1,\n  \"masterMdmId\": \"string\",\n  \"totalAff\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const schema = {",
+                  "  \"type\": \"object\",",
+                  "  \"required\": [",
+                  "    \"isAllowed\"",
+                  "  ],",
+                  "  \"properties\": {",
+                  "    \"isAllowed\": {",
+                  "      \"type\": \"boolean\"",
+                  "    }",
+                  "  }",
+                  "};",
+                  "",
+                  "pm.test('Response matches JSON Schema', function () {",
+                  "    pm.response.to.have.jsonSchema(schema);",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "affiliateInvitationUpdate — POST /vtbo/affiliate_invitation/update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/vtbo/affiliate_invitation/update",
+            "description": "",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"affInvId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// No 200 response schema found in OpenAPI."
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
