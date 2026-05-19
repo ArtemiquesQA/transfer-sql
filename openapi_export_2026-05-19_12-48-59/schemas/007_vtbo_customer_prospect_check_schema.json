@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": [
+    "isProspect"
+  ],
+  "properties": {
+    "isProspect": {
+      "type": "boolean"
+    }
+  }
+}
