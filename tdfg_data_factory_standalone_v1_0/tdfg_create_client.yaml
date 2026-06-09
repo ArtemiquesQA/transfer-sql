@@ -1,0 +1,150 @@
+name: "TDFG Data Factory"
+variables:
+  base_tdfg_url: "https://iftdfg-apc001lk.test.vtb.ru:51000"
+  sofk_mock_url: "https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru"
+  package_code: "PRIVILEGE2"
+  package_name: "ПривилегияМК"
+  bind_service_team: "false"
+  service_team_client_id: ""
+  service_team_user_login: "VTB4090196@test.vtb.ru"
+  point_of_sale: ""
+  point_of_sale_json: "null"
+  tdfg_authorization: ""
+default_headers:
+  Accept: "application/json, text/plain, */*"
+  Accept-Language: "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7"
+  Content-Type: "application/json"
+  Authorization: "{{tdfg_authorization}}"
+  Origin: "https://iftdfg-ngc001lk.test.vtb.ru"
+  Referer: "https://iftdfg-ngc001lk.test.vtb.ru/"
+steps:
+  - id: "get_cookie"
+    name: "0. Получить JSESSIONID"
+    method: "GET"
+    url: "{{base_tdfg_url}}/orders/findMyPageable?page=0&size=16&sort=id,desc"
+    expected_status: [200]
+    extract_cookie:
+      name: "JSESSIONID"
+      save_as: "JSESSIONID"
+    continue_on_error: true
+
+  - id: "create_client"
+    name: "1. Заявка на создание клиента"
+    method: "POST"
+    url: "{{base_tdfg_url}}/orders"
+    expected_status: [200, 201]
+    generate:
+      firstName: "random_first_name"
+      lastName: "random_last_name"
+      middleName: "random_middle_name"
+      passportNumber: "digits:6"
+      passportSeries: "digits:4"
+      passportCode: "passport_code"
+      inn: "digits:12"
+      registrationIndex: "digits:6"
+      mobilePhone: "mobile_phone"
+      jobPhone: "job_phone"
+      homePhone: "home_phone"
+      dateBirthday: "birthday:1940-01-01:2004-12-31"
+    body: |
+      {
+        "contour": {"id": "IFT", "name": "ИФТ"},
+        "tasks": [
+          {
+            "entityId": "client",
+            "data": {
+              "name_last": "{{lastName}}",
+              "name_first": "{{firstName}}",
+              "name_father": "{{middleName}}",
+              "date_birthday": "{{dateBirthday}}",
+              "identity_document_type": "21",
+              "passport_number": "{{passportNumber}}",
+              "passport_series": "{{passportSeries}}",
+              "passport_place_delivery": "ФМС России",
+              "passport_code": "{{passportCode}}",
+              "passport_date_delivery": "01.10.2021",
+              "inn": "{{inn}}",
+              "SNILS": "51146985588",
+              "id-country": "643",
+              "citizenship": "643",
+              "registration_city": "Москва",
+              "registration_street": "Лубянка",
+              "registration_house": "13",
+              "registration_flat": "15",
+              "place_birthday": "Москва",
+              "registration_index": "{{registrationIndex}}",
+              "email": "usemail@gmail.com",
+              "mobile_phone": "{{mobilePhone}}",
+              "job_phone": "{{jobPhone}}",
+              "home_phone": "{{homePhone}}",
+              "blacklist": "NONE",
+              "identificationType": "1",
+              "segment_light": "N",
+              "VIP": "N",
+              "retail_service_flag": "N",
+              "ac_domain": "master",
+              "create_ac20_bco": "TRUE",
+              "generate_tbid": "FALSE",
+              "identificationStatusLSGF": "FULL",
+              "createInWAY4VTB": "FALSE",
+              "createInWAY4AIR": "FALSE",
+              "createInLSGF": "FALSE",
+              "createInWAY4OLD": "FALSE",
+              "bankEmployee": "0",
+              "rezidentFlag": "true",
+              "genderCode": "1"
+            }
+          }
+        ]
+      }
+    extract:
+      created_client_id: "$.id"
+
+  - id: "get_mdm"
+    name: "2. Проверка статуса + получение МДМ"
+    method: "GET"
+    url: "{{base_tdfg_url}}/orders/{{created_client_id}}"
+    expected_status: [200]
+    extract:
+      mdm_client: "$.tasks[0].data.partyUid"
+    set_context_if_empty:
+      service_team_client_id: "{{mdm_client}}"
+
+  - id: "set_package"
+    name: "3. Прокинуть ПУ"
+    method: "POST"
+    url: "{{base_tdfg_url}}/orders"
+    expected_status: [200, 201]
+    condition:
+      variable: "package_code"
+      not_empty: true
+    body: |
+      {
+        "contour": {"id": "IFT", "name": "ИФТ"},
+        "tasks": [
+          {
+            "entityId": "package_link",
+            "data": {
+              "package": "{{package_code}}",
+              "MDMID": "{{mdm_client}}"
+            }
+          }
+        ]
+      }
+
+  - id: "bind_service_team"
+    name: "4. Закрепить в КО"
+    method: "POST"
+    url: "{{sofk_mock_url}}/mock/service-package"
+    expected_status: [200, 201]
+    condition:
+      variable: "bind_service_team"
+      equals: "true"
+    body: |
+      {
+        "operationType": "auto",
+        "userLogin": "{{service_team_user_login}}",
+        "clientId": "{{service_team_client_id}}",
+        "newPackageName": "{{package_name}}",
+        "pointOfSale": {{point_of_sale_json}}
+      }

@@ -1,0 +1,66 @@
+{
+  "step": "1. Заявка на создание клиента",
+  "method": "POST",
+  "url": "https://iftdfg-apc001lk.test.vtb.ru:51000/orders",
+  "headers": {
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Content-Type": "application/json",
+    "Origin": "https://iftdfg-ngc001lk.test.vtb.ru",
+    "Referer": "https://iftdfg-ngc001lk.test.vtb.ru/"
+  },
+  "body": {
+    "contour": {
+      "id": "IFT",
+      "name": "ИФТ"
+    },
+    "tasks": [
+      {
+        "entityId": "client",
+        "data": {
+          "name_last": "Лебедев",
+          "name_first": "Александр",
+          "name_father": "Сергеевич",
+          "date_birthday": "1989-12-23",
+          "identity_document_type": "21",
+          "passport_number": "289657",
+          "passport_series": "6950",
+          "passport_place_delivery": "ФМС России",
+          "passport_code": "180-179",
+          "passport_date_delivery": "01.10.2021",
+          "inn": "339801516758",
+          "SNILS": "51146985588",
+          "id-country": "643",
+          "citizenship": "643",
+          "registration_city": "Москва",
+          "registration_street": "Лубянка",
+          "registration_house": "13",
+          "registration_flat": "15",
+          "place_birthday": "Москва",
+          "registration_index": "026714",
+          "email": "usemail@gmail.com",
+          "mobile_phone": "89123102681",
+          "job_phone": "84953361261",
+          "home_phone": "84950185086",
+          "blacklist": "NONE",
+          "identificationType": "1",
+          "segment_light": "N",
+          "VIP": "N",
+          "retail_service_flag": "N",
+          "ac_domain": "master",
+          "create_ac20_bco": "TRUE",
+          "generate_tbid": "FALSE",
+          "identificationStatusLSGF": "FULL",
+          "createInWAY4VTB": "FALSE",
+          "createInWAY4AIR": "FALSE",
+          "createInLSGF": "FALSE",
+          "createInWAY4OLD": "FALSE",
+          "bankEmployee": "0",
+          "rezidentFlag": "true",
+          "genderCode": "1"
+        }
+      }
+    ]
+  },
+  "overridden_from_ui": false
+}

@@ -1,0 +1,14 @@
+{
+  "base_tdfg_url": "https://iftdfg-apc001lk.test.vtb.ru:51000",
+  "sofk_mock_url": "https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru",
+  "package_code": "PRIVILEGE2",
+  "package_name": "ПривилегияМК",
+  "bind_service_team": "true",
+  "service_team_client_id": "<MDM_ID>",
+  "service_team_user_login": "VTB4090196@test.vtb.ru",
+  "point_of_sale": "",
+  "point_of_sale_json": "null",
+  "tdfg_authorization": "",
+  "mdm_client": "<MDM_ID>",
+  "created_client_id": "<ORDER_ID>"
+}
