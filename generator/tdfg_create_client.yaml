@@ -33,6 +33,9 @@ steps:
     method: "POST"
     url: "{{base_tdfg_url}}/orders"
     expected_status: [200, 201]
+    # Пауза после создания заявки перед запросом статуса/MDM.
+    # Если сервису нужно больше времени на обработку, увеличь значение.
+    delay_after_seconds: 7
     generate:
       firstName: "random_first_name"
       lastName: "random_last_name"
