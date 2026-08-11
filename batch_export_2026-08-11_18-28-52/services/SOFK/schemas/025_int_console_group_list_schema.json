@@ -1,0 +1,23 @@
+{
+  "type": "array",
+  "maxItems": 10,
+  "items": {
+    "type": "object",
+    "required": [
+      "kind"
+    ],
+    "properties": {
+      "kind": {
+        "type": "string",
+        "enum": [
+          "PRIME",
+          "AFFILIATE",
+          "TEMPORARY_AGREEMENT",
+          "TOP_AFFLUENT",
+          "ELSE",
+          "UNASSIGNED"
+        ]
+      }
+    }
+  }
+}

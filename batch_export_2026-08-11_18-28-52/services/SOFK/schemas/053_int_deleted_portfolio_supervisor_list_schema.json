@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "required": [
+    "list",
+    "aggregates"
+  ],
+  "properties": {
+    "list": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "required": [
+          "employee",
+          "branch",
+          "clientsMainCount",
+          "endDate"
+        ],
+        "properties": {
+          "employee": {
+            "type": "object",
+            "required": [
+              "id",
+              "lastName",
+              "firstName",
+              "middleName"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": -1,
+                "maximum": 9223372036854775807
+              },
+              "lastName": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "firstName": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "middleName": {
+                "type": "string",
+                "maxLength": 50
+              }
+            }
+          },
+          "branch": {
+            "type": "object",
+            "properties": {}
+          },
+          "clientsMainCount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "endDate": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "aggregates": {
+      "type": "object",
+      "required": [
+        "total"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      }
+    }
+  }
+}

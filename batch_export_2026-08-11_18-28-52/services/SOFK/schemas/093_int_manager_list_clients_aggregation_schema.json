@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "required": [
+    "topTotal",
+    "totalMine",
+    "totalShifted",
+    "newShifts"
+  ],
+  "properties": {
+    "totalMine": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "totalShifted": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "newShifts": {
+      "type": "array",
+      "maxItems": 2147483647,
+      "items": {
+        "type": "object",
+        "required": [
+          "manager"
+        ],
+        "properties": {
+          "manager": {
+            "type": "object",
+            "required": [
+              "id",
+              "lastName",
+              "firstName",
+              "middleName"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": -1,
+                "maximum": 9223372036854775807
+              },
+              "lastName": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "firstName": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "middleName": {
+                "type": "string",
+                "maxLength": 50
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "required": [
+    "clientsCount"
+  ],
+  "properties": {
+    "clientsCount": {
+      "type": "integer",
+      "minimum": -1,
+      "maximum": 9223372036854775807
+    }
+  }
+}

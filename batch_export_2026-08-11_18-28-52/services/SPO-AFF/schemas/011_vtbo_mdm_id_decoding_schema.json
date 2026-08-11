@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": [
+    "mdmId"
+  ],
+  "properties": {
+    "mdmId": {
+      "type": "string",
+      "maxLength": 40
+    }
+  }
+}

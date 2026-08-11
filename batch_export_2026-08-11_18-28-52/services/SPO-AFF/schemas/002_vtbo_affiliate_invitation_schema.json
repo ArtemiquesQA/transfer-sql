@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": [
+    "masterInfo"
+  ],
+  "properties": {
+    "masterInfo": {
+      "type": "object",
+      "required": [
+        "lastName",
+        "firstName"
+      ],
+      "properties": {
+        "lastName": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "firstName": {
+          "type": "string",
+          "maxLength": 50
+        }
+      }
+    }
+  }
+}

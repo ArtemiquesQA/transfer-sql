@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "required": [
+    "orgId",
+    "roles",
+    "isSupervisor"
+  ],
+  "properties": {
+    "orgId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "enum": [
+          "SUPERVISOR",
+          "SUPERVISOR_PRIME",
+          "PERSONAL_MANAGER",
+          "PFM",
+          "PFM2",
+          "ACCOUNT_MANAGER",
+          "ACCOUNT_MANAGER_PRIVILEGE"
+        ]
+      }
+    },
+    "isSupervisor": {
+      "type": "boolean"
+    }
+  }
+}

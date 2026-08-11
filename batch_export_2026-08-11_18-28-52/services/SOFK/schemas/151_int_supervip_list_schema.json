@@ -1,0 +1,164 @@
+{
+  "type": "object",
+  "required": [
+    "list",
+    "aggregates"
+  ],
+  "properties": {
+    "list": {
+      "type": "array",
+      "maxItems": 2147483647,
+      "items": {
+        "type": "object",
+        "required": [
+          "customer",
+          "servicePack",
+          "isVip",
+          "isTop",
+          "isExOb",
+          "isSuperVip",
+          "team",
+          "branch"
+        ],
+        "properties": {
+          "customer": {
+            "type": "object",
+            "required": [
+              "id",
+              "lastName",
+              "firstName",
+              "middleName"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "minimum": -1,
+                "maximum": 9223372036854775807
+              },
+              "lastName": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "firstName": {
+                "type": "string",
+                "maxLength": 50
+              },
+              "middleName": {
+                "type": "string",
+                "maxLength": 50
+              }
+            }
+          },
+          "servicePack": {
+            "type": "object",
+            "properties": {}
+          },
+          "isVip": {
+            "type": "boolean"
+          },
+          "isTop": {
+            "type": "boolean"
+          },
+          "isExOb": {
+            "type": "boolean"
+          },
+          "isSuperVip": {
+            "type": "boolean"
+          },
+          "team": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "type": "object",
+              "required": [
+                "role",
+                "manager"
+              ],
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "PERSONAL_MANAGER",
+                    "SUPERVISOR",
+                    "SUPERVISOR_PRIME",
+                    "PFM",
+                    "BILL_ACCOUNTANT",
+                    "OVERSIER",
+                    "PFM2",
+                    "SUPERVISOR_RST",
+                    "MANAGER_RST",
+                    "UDGO",
+                    "UD_RSK",
+                    "UDGO_PRIME",
+                    "SUPERVISOR_UPIP",
+                    "BROKER",
+                    "SUPER_VIP_ADMIN",
+                    "BILL_ACCOUNTANT_PRIVILEGE",
+                    "CONSOLE_SPO"
+                  ]
+                },
+                "manager": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "lastName",
+                    "firstName",
+                    "middleName"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "minimum": -1,
+                      "maximum": 9223372036854775807
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "maxLength": 50
+                    },
+                    "middleName": {
+                      "type": "string",
+                      "maxLength": 50
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "branch": {
+            "type": "object",
+            "properties": {}
+          }
+        }
+      }
+    },
+    "aggregates": {
+      "type": "object",
+      "required": [
+        "topTotal",
+        "topTotalArchive",
+        "bottomTotal"
+      ],
+      "properties": {
+        "topTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        },
+        "topTotalArchive": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        },
+        "bottomTotal": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9223372036854775807
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+Current OpenAPI collection generation summary
+
+Input folder: C:\Users\Artemiques\Documents\GitHub\transfer-sql\YYAML\Итоговая
+Environment: IFT
+OpenAPI files found: 31
+Current spec files used: 28
+Older version files skipped: 3
+Services: 6
+Unique methods: 234
+EXT methods moved to separate Postman folder: 20
+Duplicate methods skipped: 14
+Unresolved files: 0
+
+Services:
+- SOFK: 187 unique methods | files=23 | url=https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru | variable={{sofk-url}}
+    source: ext-affiliates-add.yaml
+    source: ext-affiliates.yaml
+    source: ext-branch-by-id.yaml
+    source: ext-check-personalManager-v3.yaml
+    source: ext-customers-by-login-roles.yaml
+    source: ext-customers-by-login.yaml
+    source: ext-customers-by-tabnum.yaml
+    source: ext-employee-by-tabnum.yaml
+    source: ext-family-package.yaml
+    source: ext-inn.yaml
+    source: ext-kro-api.yaml
+    source: ext-managers-v2.yaml
+    source: ext-marks.yaml
+    source: ext-personalManagers.yaml
+    source: ext-potential-customer-add.yaml
+    source: ext-serviceteam-v2.yaml
+    source: ext-supervisors.yaml
+    source: int-supervip-reports.yaml
+    source: serv-v1.yaml
+    source: sofk-aff-ext-openapi.yaml
+    source: ui-console.yaml
+    source: ui-v1.yaml
+    source: vtbo-relative-affiliates.yaml
+- SPO-AFF: 19 unique methods | files=1 | url=https://tbcv-vip-prime-spo-aff.ift01.tbcv.test.vtb.ru | variable={{spo-aff-url}}
+    source: affUiApi.yaml
+- SPO-BFF: 11 unique methods | files=1 | url=https://tbcv-vip-prime-spo-bff.ift01.tbcv.test.vtb.ru | variable={{spo-bff-url}}
+    source: bff-ui-openapi.json
+- SPO-KRO: 7 unique methods | files=1 | url=https://tbcv-vip-prime-spo-kro.ift01.tbcv.test.vtb.ru | variable={{spo-kro-url}}
+    source: kro-openapi.json
+- SPO-SHARE: 7 unique methods | files=1 | url=https://tbcv-vip-prime-spo-share.ift01.tbcv.test.vtb.ru | variable={{spo-share-url}}
+    source: shareUiApi.yml
+- SPO-HISTORY: 3 unique methods | files=1 | url=https://tbcv-vip-prime-spo-history.ift01.tbcv.test.vtb.ru | variable={{spo-history-url}}
+    source: spo-history-openapi.yml
+
+Skipped older versions:
+- ext-check-personalManager.yaml
+- ext-managers.yaml
+- ext-serviceteam.yaml
+
+Duplicate METHOD + PATH entries:
+- SOFK POST /vtbo/sofk/customer/get | kept=sofk-aff-ext-openapi.yaml | skipped=vtbo-relative-affiliates.yaml
+- SOFK POST /vtbo/sofk/inner_circle | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK GET /vtbo/sofk/inner_circle/member/{mdm_id} | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK GET /vtbo/sofk/count_affiliates/{mdm_id} | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/inner_circle/check | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/prime/affiliate/add | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/customer/add | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/customers/by_id | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK DELETE /vtbo/sofk/prime/affiliate | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/customers/by_customer_id | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/affiliate/check | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK GET /vtbo/sofk/prospect/check/{mdm_id} | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/affiliate_invitation/create | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml
+- SOFK POST /vtbo/sofk/inner_circle/members | kept=vtbo-relative-affiliates.yaml | skipped=sofk-aff-ext-openapi.yaml

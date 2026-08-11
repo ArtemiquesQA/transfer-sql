@@ -1,0 +1,40 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "mdm_id",
+      "client_segment",
+      "role_in_team",
+      "shifter"
+    ],
+    "properties": {
+      "mdm_id": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "client_segment": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "PRIME",
+          "PRIVILEGE"
+        ],
+        "maxLength": 50
+      },
+      "role_in_team": {
+        "type": "string",
+        "enum": [
+          "PERSONAL_MANAGER",
+          "PFM",
+          "PFM2",
+          "BILL_ACCOUNTANT"
+        ],
+        "maxLength": 50
+      },
+      "shifter": {
+        "type": "boolean"
+      }
+    }
+  }
+}
