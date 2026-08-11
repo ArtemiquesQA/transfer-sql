@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv_sofk-commonApi-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с API СОФК
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: branch-controller
+    description: Методы работы с точками продаж
+paths:
+  /ext/branch/by-id/{id}:
+    get:
+      description: Данные по точке продаж
+      operationId: get_branch_info_by_id
+      tags:
+        - branch-controller
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: false
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 20
+        - name: id
+          in: path
+          required: true
+          description: код точки продажи
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+      responses:
+        "200":
+          description: Данные по точке продаж
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BranchInfo'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "404":
+          description: ТП не найдена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    BranchInfo:
+      type: object
+      description: Информация о ТП
+      additionalProperties: false
+      required:
+        - supervisors
+        - roles
+        - isSupervisor
+      properties:
+        supervisors:
+          type: array
+          minItems: 0
+          maxItems: 100
+          description: супервизоры отделения
+          items:
+            $ref: '#/components/schemas/SupervisorInfo'
+        primes:
+          type: array
+          minItems: 0
+          maxItems: 10000
+          description: mdmId клиентов Прайм в данной ТП
+          items:
+            type: string
+            minLength: 0
+            maxLength: 255
+        privileges:
+          type: array
+          minItems: 0
+          maxItems: 10000
+          description: mdmId клиентов Привилегии в данной ТП
+          items:
+            type: string
+            minLength: 0
+            maxLength: 255
+    SupervisorInfo:
+      type: object
+      description: Информация о супервизоре
+      additionalProperties: false
+      required:
+        - tabNum
+      properties:
+        tabNum:
+          type: string
+          description: Табельный номер
+          minLength: 0
+          maxLength: 50
+          example: '142552'
+        lastName:
+          type: string
+          description: Фамилия
+          minLength: 0
+          maxLength: 50
+          example: Марков
+        firstName:
+          type: string
+          description: Имя
+          minLength: 0
+          maxLength: 50
+          example: Андрей
+        middleName:
+          type: string
+          description: Отчество
+          minLength: 0
+          maxLength: 50
+          example: Викторович
+        email:
+          type: string
+          description: Адрес электронной почты сотрудника в команде обслуживания
+          minLength: 0
+          maxLength: 50
+          example: markov@vtb.ru
+          pattern: '^.{2,}@.{3,}$'
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: 'date-time'
+          description: Время ответа
+          
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: /employee/by-login/12342123

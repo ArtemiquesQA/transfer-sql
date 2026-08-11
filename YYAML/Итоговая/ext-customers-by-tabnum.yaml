@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv_sofk-commonApi-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с API СОФК
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: customers-by-tabnum-controller
+    description: Методы работы с клиентами персональных менеджеров
+paths:
+  /ext/customers/by-tabnum/{tabnum}:
+    get:
+      description: Все клиенты менеджера
+      operationId: get_customers_by_manager_tabnum
+      tags:
+        - customers-by-tabnum-controller
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: false
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 20
+        - name: tabnum
+          in: path
+          required: true
+          description: Табельный номер менеджера
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+      responses:
+        "200":
+          description: Клиенты менеджера
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerAndTeamInfo'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "404":
+          description: Менеджер не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "422":
+          description: У менеджера нет закрепленных за ним клиентов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    CustomerAndTeamInfo:
+      type: object
+      description: Описание клиента
+      additionalProperties: false
+      required:
+        - mdm_id
+        - client_segment
+        - role_in_team
+        - shifter
+      properties:
+        mdm_id:
+          type: string
+          description: MdmId клиента
+          maxLength: 50
+          example: '1401382340'
+        last_name:
+          type: string
+          description: Фамилия
+          maxLength: 50
+          example: Галеева
+        first_name:
+          type: string
+          description: Имя
+          maxLength: 50
+          example: Ирина
+        middle_name:
+          type: string
+          description: Отчество
+          maxLength: 50
+          example: Яковлевна
+        client_segment:
+          type: string
+          description: Сегмент клиента
+          maxLength: 50
+          enum:
+            - UNKNOWN
+            - PRIME
+            - PRIVILEGE
+        role_in_team:
+          type: string
+          description: Роль сотрудника в команде обслуживания
+          maxLength: 50
+          enum:
+            - PERSONAL_MANAGER
+            - PFM
+            - PFM2
+            - BILL_ACCOUNTANT
+        shifter:
+          type: boolean
+          description: Признак замещающий или основной сотрудник
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: 'date-time'
+          description: Время ответа
+          
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: /employee/by-login/12342123

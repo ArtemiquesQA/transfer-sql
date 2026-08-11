@@ -1,0 +1,47 @@
+{
+  "type": "array",
+  "minItems": 1,
+  "maxItems": 2000,
+  "items": {
+    "type": "object",
+    "required": [
+      "employee",
+      "count"
+    ],
+    "properties": {
+      "employee": {
+        "type": "object",
+        "required": [
+          "id",
+          "lastName",
+          "firstName",
+          "middleName"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": -1,
+            "maximum": 9223372036854775807
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "firstName": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "middleName": {
+            "type": "string",
+            "maxLength": 50
+          }
+        }
+      },
+      "count": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 2147483647
+      }
+    }
+  }
+}

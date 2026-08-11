@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv-addPotential-s-rest-v1
+  version: 1.0.0
+  contact:
+    name: Кочегарова Оксана Сергеевна
+    email: okochegarova@vtb.ru
+    url: https://www.vtb.ru
+  description: Метод для добавление потенциальных клиентов из внешних систем
+servers:
+  - url: https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru
+    description: IFT
+  - url: https://tbcv-vip-prime-sofk.rr01.tbcv.test.vtb.ru
+    description: PREPROD
+  - url: https://tbcv-vip-prime-sofk.tbcv.region.vtb.ru
+    description: PROD
+tags:
+  - name: ext-potential-customer-controller
+    description: Методы работы с персональными менеджерами
+paths:
+  /ext/potential-customer/add:
+    post:
+      tags:
+        - ext-potential-customer-controller
+      description: Добавление потенциального клиента
+      operationId: add_potential_customer
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: false
+          description: Имя сервиса передающие данные для добавления
+          schema:
+            type: string
+            maxLength: 20
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddPotentialCustomerRequest'
+      responses:
+        '200':
+          description: Клиент добавлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '400':
+          description: Неуспешное добавление
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    AddPotentialCustomerRequest:
+      type: object
+      required:
+        - mdmId
+        - employeeLogin
+      properties:
+        mdmId:
+          type: string
+          description: Идентификатор клиента
+          example: '123456'
+        employeeLogin:
+          type: string
+          description: Логин сотрудника
+          example: vtb4059660
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Клиент успешно добавлен
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Причина неуспеха
+          example: У данного клиента уже есть назначенная КО
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Время ответа
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: potential-customer/add/12342123

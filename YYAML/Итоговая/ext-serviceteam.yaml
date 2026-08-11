@@ -1,0 +1,238 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv_sofk-commonApi-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с API СОФК
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: service-team-controller
+    description: Методы работы с КО
+paths:
+  /ext/serviceteam/{mdmId}:
+    get:
+      description: Метод возвращает КО заданного клиента
+      operationId: get_service_team_by_customer_mdm_id
+      tags:
+        - service-team-controller
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: false
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 20
+        - name: mdmId
+          in: path
+          required: true
+          description: Идентификатор клиента
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      responses:
+        "200":
+          description: Члены команды обслуживания
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceTeamExt'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "404":
+          description: Клиент не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "422":
+          description: У клиента нет КО
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    ServiceTeamExt:
+      type: object
+      description: Команда обслуживания
+      additionalProperties: false
+      required:
+        - segment
+        - team
+      properties:
+        segment:
+          $ref: '#/components/schemas/ServiceSegment'
+        team:
+          type: array
+          minItems: 1
+          maxItems: 8
+          items:
+            $ref: '#/components/schemas/ServiceTeamMember'
+    ServiceSegment:
+      type: string
+      description: Сегмент обслуживания клиента
+      enum:
+        - PRIME
+        - PRIVILEGE
+    ServiceTeamMember:
+      type: object
+      description: Член команды обслуживания
+      additionalProperties: false
+      required:
+        - role
+        - flag_main
+        - tabNum
+        - login
+        - orgId
+        - statusId
+        - status
+      properties:
+        role:
+          $ref: '#/components/schemas/ServiceTeamRole'
+        flag_main:
+          type: boolean
+          description: Флаг основной сотрудника
+          example: false
+        tabNum:
+          type: string
+          description: Табельный номер
+          minLength: 0
+          maxLength: 50
+          example: '142552'
+        login:
+          type: string
+          description: Логин
+          minLength: 0
+          maxLength: 50
+          example: KULOV
+        lastName:
+          type: string
+          description: Фамилия
+          minLength: 0
+          maxLength: 50
+          example: Марков
+        firstName:
+          type: string
+          description: Имя
+          minLength: 0
+          maxLength: 50
+          example: Андрей
+        middleName:
+          type: string
+          description: Отчество
+          minLength: 0
+          maxLength: 50
+          example: Викторович
+        email:
+          type: string
+          description: Адрес электронной почты сотрудника в команде обслуживания
+          minLength: 0
+          maxLength: 50
+          example: markov@vtb.ru
+          pattern: '^.{2,}@.{3,}$'
+        phoneNum:
+          type: string
+          description: Мобильный номер телефона
+          example: '+79108008000'
+          pattern: '^\+\d{11}$'
+        workPhoneNum:
+          type: string
+          description: Рабочий номер телефона
+          example: '+79108008000'
+          pattern: '^\+\d{11}$'
+        workPhoneExt:
+          type: string
+          description: Добавочный номер
+          minLength: 1
+          maxLength: 10
+          example: '405819'
+          pattern: '^\d{1,10}$'
+        orgId:
+          type: string
+          description: Номер отделения
+          minLength: 1
+          maxLength: 50
+          example: '50216613'
+        orgName:
+          type: string
+          description: Имя отделения
+          minLength: 0
+          maxLength: 100
+          example: РОО Волгоградский
+        orgAddress:
+          type: string
+          description: Адрес отделения
+          minLength: 0
+          maxLength: 255
+          example: Волгоград пр-кт. Ленинский, Дом. 11
+        statusId:
+          type: integer
+          format: int32
+          description: Уникальный идентификатор(код) статуса сотрудника в команде обслуживания
+          minimum: 1
+          maximum: 2
+          example: 1
+        status:
+          type: string
+          description: Наименование статуса
+          minLength: 5
+          maxLength: 30
+          example: работает
+    ServiceTeamRole:
+      type: string
+      description: Роль сотрудника в команде обслуживания
+      enum:
+        - SUPERVISOR
+        - SUPERVISOR_PRIME
+        - PERSONAL_MANAGER
+        - PFM
+        - PFM2
+        - ACCOUNT_MANAGER
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: 'date-time'
+          description: Время ответа
+          
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: /employee/by-login/12342123

@@ -1,0 +1,296 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv_sofk-commonApi-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с API СОФК
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: ext-personal-managers-controller
+    description: Методы работы с персональными менеджерами
+paths:
+  /ext/managers/{mdmId}:
+    get:
+      description: Основной и замещающий менеджеры клиента
+      operationId: get_personal_managers_by_customer_extended
+      tags:
+        - ext-personal-managers-controller
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающего данные
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 20
+        - name: mdmId
+          in: path
+          required: true
+          description: MdmId клиента
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 40
+      responses:
+        "200":
+          description: Основной и замещающий менеджер
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExtManagersResponse'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "404":
+          description: Клиент не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "422":
+          description: Команда обслуживания не назначена/Персональный менеджер не назначен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    ExtManagersResponse:
+      type: object
+      description: Описание сотрудника
+      additionalProperties: false
+      properties:
+        employee:
+          $ref: '#/components/schemas/EmployeeInfoExt'
+        client:
+          $ref: '#/components/schemas/ClientInfo'
+        org:
+          $ref: '#/components/schemas/OrgInfo'
+        status:
+          $ref: '#/components/schemas/StatusInfo'
+    EmployeeInfoExt:
+      type: object
+      description: Информация по сотруднику из команды обслуживания
+      additionalProperties: false
+      properties:
+        last_name:
+          type: string
+          description: Фамилия
+          minLength: 1
+          maxLength: 50
+          example: Марков
+        first_name:
+          type: string
+          description: Имя
+          minLength: 1
+          maxLength: 50
+          example: Андрей
+        middle_name:
+          type: string
+          description: Отчество
+          minLength: 1
+          maxLength: 50
+          example: Викторович
+        login:
+          type: string
+          description: Логин
+          minLength: 1
+          maxLength: 50
+          example: KULOV
+        tabnum:
+          type: string
+          description: Табельный номер
+          minLength: 1
+          maxLength: 50
+          example: '142552'
+        role_in_team:
+          type: string
+          description: Роль сотрудника в команде обслуживания
+          maxLength: 50
+          enum:
+            - SUPERVISOR
+            - SUPERVISOR_PRIME
+            - PERSONAL_MANAGER
+            - PFM
+            - PFM2
+            - BILL_ACCOUNTANT
+            - BROKER
+        remote_manager:
+          type: boolean
+          description: Признак удалённого менеджера
+          example: false
+        is_main:
+          type: boolean
+          description: Флаг основной ПМ
+          example: false
+        email:
+          type: string
+          description: Адрес электронной почты сотрудника в команде обслуживания
+          minLength: 6
+          maxLength: 50
+          example: markov@vtb.ru
+        phone_num:
+          type: string
+          description: Мобильный номер телефона
+          example: '+79108008000'
+          pattern: '^\+\d{11}$'
+        work_phone_num:
+          type: string
+          description: Рабочий номер телефона
+          example: '+79108008000'
+          pattern: '^\+\d{11}$'
+        work_phone_ext:
+          type: string
+          description: Добавочный номер
+          example: '405819'
+          pattern: '^\d{1,10}$'
+        workhours:
+          type: string
+          description: Часы работы сотрудника в команде обслуживания
+          minLength: 10
+          maxLength: 100
+          example: 'пн-пт: 09:00-18:00 сб, вс: выходной'
+        timezone:
+          type: string
+          description: Часовой пояс сотрудника в команде обслуживания с меткой временной зоны
+          minLength: 5
+          maxLength: 6
+          example: 'UTC+3'
+        target_date:
+          type: string
+          minLength: 10
+          maxLength: 10
+          description: Дата прикрепления основного ПМ к Клиенту
+          pattern: '^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|(1[0-9])|(2[0-9])|(3[0-1]))$'
+        shift_date:
+          type: string
+          minLength: 10
+          maxLength: 10
+          description: Дата начала замещения ПМ/ПФМ
+          pattern: '^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|(1[0-9])|(2[0-9])|(3[0-1]))$'
+        return_date:
+          type: string
+          minLength: 10
+          maxLength: 10
+          description: Дата окончания замещения ПМ/ПФМ
+          pattern: '^[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|(1[0-9])|(2[0-9])|(3[0-1]))$'
+    ClientInfo:
+      type: object
+      description: Информация по клиентским меткам
+      additionalProperties: false
+      properties:
+        is_top:
+          type: boolean
+          description: Наличие у клиента метки "TOP"
+          example: false
+        is_vip:
+          type: boolean
+          description: Наличие у клиента метки "VIP"
+          example: false
+        service_group:
+          type: string
+          description: Группа обслуживания клиента
+          example: '7'
+          minLength: 1
+          maxLength: 5
+    OrgInfo:
+      type: object
+      description: Информация по отделению
+      additionalProperties: false
+      properties:
+        address:
+          type: string
+          description: Адрес отделения
+          minLength: 1
+          maxLength: 255
+          example: Волгоград пр-кт. Ленинский, Дом. 11
+        id:
+          type: string
+          description: Номер отделения
+          minLength: 1
+          maxLength: 50
+          example: '50216613'
+        name:
+          type: string
+          description: Имя отделения
+          minLength: 1
+          maxLength: 100
+          example: РОО Волгоградский
+        timezone:
+          type: string
+          description: Часовой пояс отделения сотрудника в команде обслуживания
+          minLength: 5
+          maxLength: 6
+          example: 'UTC+3'
+        workhours:
+          type: string
+          description: Часы работы отделения сотрудника в команде обслуживания
+          minLength: 10
+          maxLength: 100
+          example: 'пн-пт: 09:00-18:00 сб, вс: выходной'
+    StatusInfo:
+      type: object
+      description: Статус сотрудника
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Уникальный идентификатор(код) статуса сотрудника в команде обслуживания
+          example: 1
+          minimum: 1
+          maximum: 9
+        name:
+          type: string
+          description: Статус сотрудника. Если нет замещающего ПМ, то статус основного ПМ всегда - "работает". Если есть замещающий ПМ, то основной ПМ всегда имеет статус "временно не работает", а замещающий ПМ всегда имеет статус "работает".
+          example: работает
+          minLength: 8
+          maxLength: 20
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: 'date-time'
+          description: Время ответа
+          
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: /employee/by-login/12342123

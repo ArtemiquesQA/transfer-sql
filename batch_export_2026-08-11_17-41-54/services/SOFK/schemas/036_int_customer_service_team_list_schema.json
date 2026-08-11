@@ -1,0 +1,46 @@
+{
+  "type": "array",
+  "minItems": 0,
+  "maxItems": 2000,
+  "items": {
+    "type": "object",
+    "required": [
+      "customerId",
+      "serviceTeam"
+    ],
+    "properties": {
+      "customerId": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 9223372036854775807
+      },
+      "serviceTeam": {
+        "type": "array",
+        "maxItems": 2147483647,
+        "items": {
+          "type": "object",
+          "required": [
+            "mainEmployeeId",
+            "role"
+          ],
+          "properties": {
+            "mainEmployeeId": {
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 9223372036854775807
+            },
+            "role": {
+              "type": "string",
+              "enum": [
+                "PERSONAL_MANAGER",
+                "PFM",
+                "BILL_ACCOUNTANT",
+                "BILL_ACCOUNTANT_PRIVILEGE"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

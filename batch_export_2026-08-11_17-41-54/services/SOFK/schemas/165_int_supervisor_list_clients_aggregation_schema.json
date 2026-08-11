@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": [
+    "topTotal",
+    "totalOrphaned",
+    "totalShifted"
+  ],
+  "properties": {
+    "topTotal": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9223372036854775807
+    },
+    "totalOrphaned": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9223372036854775807
+    },
+    "totalShifted": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9223372036854775807
+    }
+  }
+}

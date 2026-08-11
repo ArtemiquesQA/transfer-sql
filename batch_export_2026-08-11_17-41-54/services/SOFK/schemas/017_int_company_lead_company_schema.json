@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "required": [
+    "list",
+    "aggregates"
+  ],
+  "properties": {
+    "list": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "required": [
+          "inn",
+          "name"
+        ],
+        "properties": {
+          "inn": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          }
+        }
+      }
+    },
+    "aggregates": {
+      "type": "object",
+      "required": [
+        "total"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      }
+    }
+  }
+}

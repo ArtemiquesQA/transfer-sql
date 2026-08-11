@@ -1,0 +1,1159 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv-sofkAffShareApi-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с экранами Близкого круга в ВТБО
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: customer-vtbo-controller
+    description: Методы для работы c клиентскими данными
+  - name: inner-circle-controller
+    description: Методы для работы с Близким кругом
+  - name: inner-circle-check-controller
+    description: Методы для проверок Близкого круга
+  - name: affiliate-invitation-controller
+    description: Методы для работы с приглашениями в Близкий круг ВТБО
+paths:
+  /vtbo/sofk/customer/get:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Получить данные клиента по его mdmId/customerId
+      operationId: get_customer_by_params
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: id или mdmId клиента
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        "200":
+          description: Данные по клиенту
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerInfo'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/inner_circle:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Получение id аффилированных лиц/ключевой персоны в зависимости от роли клиента в Близком кругу в запросе метода
+      operationId: get_inner_circle_id
+      tags:
+        - inner-circle-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: id аффилированного лица/ключевой персоны
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InnerCircleMemberRequestParams'
+      responses:
+        "200":
+          description: id аффилированных лиц/ключевой персоны
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Массив клиентов
+                minItems: 0
+                maxItems: 10
+                items:
+                  $ref: '#/components/schemas/CustomerIdResponseParams'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "422":
+          description: У клиента отсутствует Близкий круг
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/inner_circle/member/{mdm_id}:
+    get:
+      security:
+        - bearerAuth: [ ]
+      description: Определение роли клиента в Близком круге
+      operationId: inner_circle_member
+      tags:
+        - inner-circle-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+        - name: mdm_id
+          in: path
+          required: true
+          description: Код Mdm клиента
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        "200":
+          description: Роль клиента в Близком круге
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InnerCircleMember'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "422":
+          description: У клиента отсутствует Близкий круг
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/count_affiliates/{mdm_id}:
+    get:
+      security:
+        - bearerAuth: [ ]
+      description: Количество аффилированных лиц ключевой персоны
+      operationId: count_affiliates
+      tags:
+        - inner-circle-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+        - name: mdm_id
+          in: path
+          required: true
+          description: Код Mdm клиента
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        "200":
+          description: Количество аффилированных лиц клиента
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AffCount'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "422":
+          description: Аффилированные лица не найдены
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/inner_circle/check:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Проверка АЛ и КП перед созданием приглашения в Близкий круг
+      operationId: inner_circle_check
+      tags:
+        - inner-circle-check-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: АЛ и КП по приглашению в Близкий круг
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AffiliateAddRequestParams'
+      responses:
+        "204":
+          description: Проверка пройдена
+          content: { }
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/prime/affiliate/add:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Добавление аффилированного лица в Близкий круг
+      operationId: affiliate_prime_add
+      tags:
+        - inner-circle-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: АЛ и КП по приглашению в Близкий круг
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AffiliateAddRequestParams'
+      responses:
+        "204":
+          description: Операция завершилась успешно
+          content: { }
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/customer/add:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Поиск и добавление аффилированного лица в таблицу customer для создания приглашения в БК
+      operationId: customer_add
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Параметры запроса списка
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - mdmId
+              description: Информация по клиенту
+              properties:
+                mdmId:
+                  type: string
+                  description: Код Mdm клиента
+                  maxLength: 40
+      responses:
+        "200":
+          description: Данные по клиенту
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerIdResponseParams'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/customers/by_id:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Получить id клиентов по mdm_id или customerId
+      operationId: get_customer_id_by_id
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Массив id
+        required: true
+        content:
+          application/json:
+            schema:
+              description: Список id клиентов
+              properties:
+                mdmId:
+                  type: array
+                  description: Массив mdm_id клиентов
+                  minItems: 1
+                  maxItems: 40
+                  items:
+                    type: string
+                    description: Код Mdm клиента
+                    maxLength: 40
+                customerIds:
+                  type: array
+                  description: Массив customerId клиентов
+                  minItems: 1
+                  maxItems: 40
+                  items:
+                    type: integer
+                    format: int64
+                    description: ID клиента
+                    minimum: 1
+                    maximum: 9223372036854775807
+      responses:
+        "200":
+          description: Id клиентов
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Массив клиентов
+                minItems: 0
+                maxItems: 40
+                items:
+                  $ref: '#/components/schemas/CustomerIdResponseParams'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/prime/affiliate:
+    delete:
+      security:
+        - bearerAuth: [ ]
+      description: Удаление связки АЛ - КП из семьи Прайм в ВТБО
+      operationId: prime_remove_affiliate_vtbo
+      tags:
+        - inner-circle-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+        - name: masterMdmId
+          in: query
+          required: true
+          schema:
+            description: Код Mdm клиента
+            type: string
+            maxLength: 40
+        - name: affiliateMdmId
+          in: query
+          required: true
+          schema:
+            description: Код Mdm клиента
+            type: string
+            maxLength: 40
+      responses:
+        "204":
+          description: Операция завершилась успешно
+          content: { }
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/customers/by_customer_id:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Получить ФИО клиентов по массиву customerId
+      operationId: get_customer_id_by_customer_id
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Массив id
+        required: true
+        content:
+          application/json:
+            schema:
+              description: Список id клиентов
+              properties:
+                customerIds:
+                  type: array
+                  description: Массив customerId клиентов
+                  minItems: 1
+                  maxItems: 40
+                  items:
+                    type: integer
+                    format: int64
+                    description: ID клиента
+                    minimum: 1
+                    maximum: 9223372036854775807
+      responses:
+        "200":
+          description: Id клиентов
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Массив клиентов
+                minItems: 0
+                maxItems: 40
+                items:
+                  $ref: '#/components/schemas/CustomerInfo'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/affiliate/check:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Проверка наличия связи АЛ с КП
+      operationId: affiliate_check
+      tags:
+        - inner-circle-check-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Параметры запроса для проверки связи АЛ с КП
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AffiliateCheckRequestParams'
+      responses:
+        "204":
+          description: Проверка пройдена
+          content: { }
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/prospect/check/{mdm_id}:
+    get:
+      security:
+        - bearerAuth: [ ]
+      description: Получить по mdmId клиента наличие метки Проспект
+      operationId: customer_prospect
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+        - name: mdm_id
+          in: path
+          required: true
+          description: Код Mdm клиента
+          schema:
+            type: string
+            maxLength: 40
+      responses:
+        "200":
+          description: Наличие метки Проспект
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerProspectParams'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/affiliate_invitation/create:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Добавление нового приглашения
+      operationId: affiliate_invitation_add
+      tags:
+        - affiliate-invitation-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Данные по приглашению в Близкий круг и Группу Близкие
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvitationAddRequestParams'
+      responses:
+        "204":
+          description: Операция завершилась успешно
+          content: { }
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/customers/by_mdm_id:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Получить ФИО клиентов по массиву mdmId
+      operationId: get_customers_by_mdm_id
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Массив id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareMembersListRequestParams'
+      responses:
+        "200":
+          description: Id клиентов
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Массив клиентов
+                minItems: 0
+                maxItems: 40
+                items:
+                  $ref: '#/components/schemas/ShareMembersInfo'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/customers/servicepack:
+    post:
+      security:
+        - bearerAuth: [ ]
+      description: Получить Пакет услуг по перечню клиентов
+      operationId: customers_servicepack
+      tags:
+        - customer-vtbo-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: Параметры запроса ПУ по массиву mdmId клиентов
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServicepackRequestParams'
+      responses:
+        "200":
+          description: Пакет услуг по массиву клиентов
+          content:
+            application/json:
+              schema:
+                type: array
+                description: Массив клиентов c пакетом услуг
+                minItems: 0
+                maxItems: 40
+                items:
+                  $ref: '#/components/schemas/CustomersServicePack'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        "404":
+          description: Клиент не найден
+          content: { }
+        "500":
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+  /vtbo/sofk/inner_circle/members:
+    post:
+      security:
+        - bearerAuth: []
+      description: >-
+        Определение роли текущего клиента и близкого в Близком круге текущего
+        пользователя
+      operationId: inner_circle_members
+      tags:
+        - inner-circle-controller
+      parameters:
+        - name: X-Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 40
+      requestBody:
+        description: mdmId клиентов по которым определяем роли в Близком круге
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InnerCircleMembersRequestParams'
+      responses:
+        '200':
+          description: >-
+            Роли текущего клиента и близкого в Близком круге текущего
+            пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InnerCircleMembers'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        '500':
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string
+  schemas:
+    CustomerInfo:
+      type: object
+      description: Описание одного клиента
+      additionalProperties: false
+      required:
+        - lastName
+        - firstName
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          description: Идентификатор клиента
+          minimum: 1
+          maximum: 9223372036854775807
+          example: '1401382340'
+        lastName:
+          type: string
+          description: Фамилия
+          maxLength: 50
+          example: Галеева
+        firstName:
+          type: string
+          description: Имя
+          maxLength: 50
+          example: Ирина
+        middleName:
+          type: string
+          description: Отчество
+          maxLength: 50
+          example: Яковлевна
+    AffCount:
+      type: object
+      description: Количество аффилированных лиц клиента
+      additionalProperties: false
+      properties:
+        totalAff:
+          type: integer
+          format: int32
+          description: Количество аффилированных лиц клиента
+          minimum: 0
+          maximum: 2147483647
+    SofkUiErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: 'date-time'
+          description: Время ответа
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: /api/v1/employee
+    AffiliateAddRequestParams:
+      type: object
+      description: АЛ и КП по приглашению в Близкий круг
+      required:
+        - masterId
+        - affiliateId
+      additionalProperties: false
+      properties:
+        masterId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID клиента
+        affiliateId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID клиента
+        relativeId:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 2147483647
+          description: ID категории родства
+    CustomerRequest:
+      type: object
+      description: Описание одного клиента
+      additionalProperties: false
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID клиента
+        mdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+    CustomerIdResponseParams:
+      type: object
+      description: Описание одного клиента
+      required:
+        - mdmId
+        - customerId
+      additionalProperties: false
+      properties:
+        customerId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID клиента
+        mdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+    InnerCircleMemberRequestParams:
+      type: object
+      description: mdmId по роли клиента в Близком круге
+      additionalProperties: false
+      properties:
+        masterMdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+        affiliateMdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+    InnerCircleMember:
+      type: object
+      description: Роль клиента в Близком круге
+      required:
+        - isMaster
+      additionalProperties: false
+      properties:
+        isMaster:
+          type: boolean
+    AffiliateCheckRequestParams:
+      type: object
+      description: АЛ и КП по связке в Близком кругу
+      required:
+        - masterMdmId
+        - affiliateMdmId
+      additionalProperties: false
+      properties:
+        masterMdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+        affiliateMdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+    CustomerProspectParams:
+      type: object
+      description: Наличие метки Проспект
+      required:
+        - isProspect
+      additionalProperties: false
+      properties:
+        isProspect:
+          type: boolean
+          description: Является ли клиент Проспектом
+    InvitationAddRequestParams:
+      type: object
+      description: Параметры создания приглашения
+      additionalProperties: false
+      required:
+        - affInvId
+        - affiliateId
+        - masterId
+        - relativeId
+        - status
+      properties:
+        affInvId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID записи из таблицы affiliate_invitation
+        affiliateId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID аффилированного лица
+        masterId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID ключевой прсоны
+        relativeId:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 2147483647
+          description: ID катгории родства
+        status:
+          type: string
+          description: Статус cоздния приглашения Семейными
+          maxLength: 30
+        approved:
+          type: boolean
+          description: Решение по приглашению
+    ShareMembersListRequestParams:
+      type: object
+      description: Запрос ФИО клиентов по списку mdmId
+      required:
+        - list
+      additionalProperties: false
+      properties:
+        list:
+          type: array
+          description: Список mdmId клиентов с идентификаторами для сортировки
+          maxItems: 2147483647
+          items:
+            $ref: '#/components/schemas/ShareMembersId'
+    ShareMembersId:
+      type: object
+      description: Список mdmId клиентов с идентификаторами для сортировки
+      required:
+        - orderId
+        - mdmId
+      additionalProperties: false
+      properties:
+        orderId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID клиента
+        mdmId:
+          type: string
+          description: Код Mdm клиента
+          maxLength: 40
+    ShareMembersInfo:
+      type: object
+      description: Описание одного клиента
+      required:
+        - orderId
+        - lastName
+        - firstName
+      additionalProperties: false
+      properties:
+        orderId:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 9223372036854775807
+          description: ID клиента
+        lastName:
+          type: string
+          maxLength: 50
+        firstName:
+          type: string
+          maxLength: 50
+        middleName:
+          type: string
+          maxLength: 50
+    ServicepackRequestParams:
+      type: object
+      description: Параметры запроса пакета услуг по массиву клиентов
+      required:
+        - mdmIds
+      additionalProperties: false
+      properties:
+        mdmIds:
+          type: array
+          description: Массив mdm_id клиентов
+          minItems: 1
+          maxItems: 40
+          items:
+            type: string
+            description: Код Mdm клиента
+            maxLength: 40
+    CustomersServicePack:
+      type: object
+      description: Пакет услуг по массиву клиентов
+      required:
+        - mdmId
+      additionalProperties: false
+      properties:
+        mdmId:
+          type: string
+          description: Код Mdm клиента
+          maxLength: 40
+        servicePack:
+          $ref: '#/components/schemas/ServicePack'
+    ServicePack:
+      type: object
+      description: Пакет услуг
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: Наименование пакета услуг
+          maxLength: 50
+        type:
+          $ref: '#/components/schemas/ServicePackType'
+    ServicePackType:
+      type: string
+      description: Типы пакетов услуг
+      enum:
+        - UNKNOWN
+        - PRIME
+        - RETAIL
+        - PRIVILEGE
+    InnerCircleMembersRequestParams:
+      type: object
+      description: mdmId клиентов для проверки роли в Близком круге
+      additionalProperties: false
+      properties:
+        userMdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+        familiarMdmId:
+          type: string
+          maxLength: 40
+          description: Код Mdm клиента
+    InnerCircleMembers:
+      type: object
+      description: Роль в Близком круге текущего пользователя и близкого
+      additionalProperties: false
+      properties:
+        user:
+          $ref: '#/components/schemas/InnerCircleRole'
+        familiar:
+          $ref: '#/components/schemas/InnerCircleRole'
+        isInnerCircle:
+          type: boolean
+          description: Метка наличия АЛ в Близком кругу текущего пользователя
+    InnerCircleRole:
+      type: object
+      description: Роль клиента в Близком круге
+      additionalProperties: false
+      required:
+        - mdmId
+        - isAffiliate
+        - isMaster
+      properties:
+        mdmId:
+          type: string
+          description: Код Mdm клиента
+          maxLength: 40
+        isAffiliate:
+          type: boolean
+          description: Является ли клиент АЛ
+        isMaster:
+          type: boolean
+          description: Является ли клиент КП

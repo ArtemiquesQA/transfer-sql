@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "required": [
+    "customer",
+    "serviceTeam"
+  ],
+  "properties": {
+    "customer": {
+      "type": "object",
+      "properties": {}
+    },
+    "serviceTeam": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "lastName",
+          "firstName"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "PERSONAL_MANAGER",
+              "SUPERVISOR",
+              "SUPERVISOR_PRIME",
+              "PFM",
+              "PFM2",
+              "BILL_ACCOUNTANT",
+              "BILL_ACCOUNTANT_PRIVILEGE"
+            ]
+          },
+          "lastName": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "firstName": {
+            "type": "string",
+            "maxLength": 50
+          }
+        }
+      }
+    }
+  }
+}

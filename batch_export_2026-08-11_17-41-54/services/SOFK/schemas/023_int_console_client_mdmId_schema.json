@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "required": [
+    "customer",
+    "servicePack",
+    "isVip",
+    "serviceGroup"
+  ],
+  "properties": {
+    "customer": {
+      "type": "object",
+      "required": [
+        "mdmid",
+        "lastName",
+        "firstName",
+        "middleName"
+      ],
+      "properties": {
+        "lastName": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "firstName": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "middleName": {
+          "type": "string",
+          "maxLength": 50
+        }
+      }
+    },
+    "servicePack": {
+      "type": "object",
+      "properties": {}
+    },
+    "isVip": {
+      "type": "boolean"
+    },
+    "serviceGroup": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "PRIME",
+            "AFFILIATE",
+            "TEMPORARY_AGREEMENT",
+            "TOP_AFFLUENT",
+            "ELSE",
+            "UNASSIGNED"
+          ]
+        }
+      }
+    }
+  }
+}

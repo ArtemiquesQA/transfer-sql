@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv_sofk-serviceApi-s-rest-v1
+  version: 1.0.0
+  contact:
+    name: Шмелёв Егор Олегович
+    email: eoshmelev@vtb.ru
+    url: https://www.vtb.ru
+  description: Методы и модели для работы с API СОФК
+servers:
+  - url: https://tbcv-vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://tbcv-vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://tbcv-vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://tbcv-vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: mutators-controller
+    description: Методы работы с мутаторами
+paths:
+  /service/mutators:
+    post:
+      description: установка мутатора
+      operationId: set_mutator
+      tags:
+        - mutators-controller
+      requestBody:
+        description: Параметры запроса списка
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MutatorSetRequestParams'
+      responses:
+        "200":
+          description: Список закрепления отделения супервизора
+
+components:
+  schemas:
+    MutatorSetRequestParams:
+      type: object
+      properties:
+        name:
+          type: string
+        mutType:
+          $ref: '#/components/schemas/MutatorType'
+        params_match_rule:
+          type: string
+        return_match_rule:
+          type: string
+        error_case:
+          type: boolean
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/MutatorChanges'
+    MutatorChanges:
+      type: object
+      properties:
+        group_rule:
+          type: string
+        replacement:
+          type: string
+    MutatorType:
+      type: string
+      description: Тип мутатора
+      enum:
+        - BRANCH_MUTATOR
+        - EMPLOYEE_BY_LOGIN_MUTATOR
+        - EMPLOYEE_BY_TAB_NUM_MUTATOR
+        - EPA_ISSUED_TOKEN_MUTATOR
+        - EPA_ACCESS_TOKEN_MUTATOR
+        - PERSON_CS_GET_MUTATOR
+        - PERSON_CS_MATCH_MUTATOR
+        - SERVICE_PACK_MUTATOR
+        - PROFILE360_MUTATOR
+        - RMA_MUTATOR

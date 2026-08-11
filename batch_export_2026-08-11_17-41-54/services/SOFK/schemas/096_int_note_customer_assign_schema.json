@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "required": [
+    "noteDescription",
+    "updateDate"
+  ],
+  "properties": {
+    "noteDescription": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  }
+}

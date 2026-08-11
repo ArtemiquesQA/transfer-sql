@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv_sofk-commonApi-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с API СОФК работа с отчётами СупеВип
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru/v1
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: supervip-reports-controller
+    description: Методы для работы экрана супервизора
+paths:
+  /ft/rb/tbcv/sofk/int/supervip/list/download:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - supervip-reports-controller
+      description: Выгрузить список SuperVIP клиентов
+      operationId: supervip_clients_download
+      responses:
+        '200':
+          description: ""
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        '401':
+          description: Проблема с аутентификацией пользователя
+          content: { }
+        '500':
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+
+  /ft/rb/tbcv/sofk/int/supervip/archive/download:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - supervip-reports-controller
+      description: Выгрузить список архивных SuperVIP клиентов
+      operationId: supervip_archive_clients_download
+      responses:
+        '200':
+          description: ""
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+        '401':
+          description: Проблема с аутентификацией пользователя
+          content: { }
+        '500':
+          description: Неизвестная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkUiErrorDto'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: string
+  schemas:
+    SofkUiErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Время ответа
+
+        status:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          maxLength: 100
+          description: URN ответа
+          example: /api/v1/employee

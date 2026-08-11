@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "required": [
+    "isMaster"
+  ],
+  "properties": {
+    "isMaster": {
+      "type": "boolean"
+    }
+  }
+}

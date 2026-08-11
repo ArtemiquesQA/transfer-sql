@@ -1,0 +1,21 @@
+{
+  "type": "array",
+  "maxItems": 100,
+  "items": {
+    "type": "object",
+    "required": [
+      "login",
+      "employee"
+    ],
+    "properties": {
+      "employee": {
+        "type": "object",
+        "properties": {}
+      },
+      "login": {
+        "type": "string",
+        "maxLength": 50
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv-getClientMarksByMdmId-s-rest-v1
+  version: 1.0.0
+  description: Методы и модели для работы с API 1447_8
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb
+    description: DSO
+  - url: https://vip-prime-sofk.k3-vip-prime.apps.ss1-genr01.test.vtb.ru
+    description: K3
+  - url: https://vip-prime-sofk.k4-vip-prime.apps.ss1-genr01.test.vtb.ru
+    description: K4
+  - url: https://vip-prime-sofk.tbcv.region.vtb.ru
+    description: PROD
+tags:
+  - name: ext-marks-controller-v1
+    description: Метод для работы с метками клиента
+paths:
+  /ext/marks/{mdmId}:
+    get:
+      description: Метки и группа обслуживания клиента
+      operationId: get_marks_by_MdmId_v1
+      tags:
+        - ext-marks-controller-v1
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: true
+          description: Имя сервиса запрашивающего данные
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 20
+        - name: mdmId
+          in: path
+          required: true
+          description: MdmId клиента
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 40
+      responses:
+        "200":
+          description: Метки и группа обслуживания
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtMarksResponse'
+        "400":
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "404":
+          description: Клиент не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "422":
+          description: У клиента нет аффилированных лиц
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        "500":
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    ExtMarksResponse:
+      type: object
+      description: Описание сотрудника
+      additionalProperties: false
+      properties:
+        top:
+          type: boolean
+          description: Наличие у клиента метки "TOP"
+          example: false
+        vip:
+          type: boolean
+          description: Наличие у клиента метки "VIP"
+          example: false
+        supervip:
+          type: boolean
+          description: Наличие у клиента метки "supervip"
+          example: false
+        ExOb:
+          type: boolean
+          description: Наличие у клиента метки "ExOb"
+          example: false
+        service_group:
+          type: string
+          description: Номер группы обслуживания клиента
+          example: 1
+          minLength: 1
+          maxLength: 5
+        service_group_name:
+          type: string
+          description: Наименование группы обслуживания клиента
+          example: Аффилированное лицо
+          minLength: 1
+          maxLength: 255
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: /marks/12342123

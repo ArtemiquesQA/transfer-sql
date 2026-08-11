@@ -1,0 +1,22 @@
+{
+  "type": "array",
+  "minItems": 0,
+  "maxItems": 1000,
+  "items": {
+    "type": "object",
+    "required": [
+      "churnName",
+      "churnType"
+    ],
+    "properties": {
+      "churnName": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "churnType": {
+        "type": "string",
+        "maxLength": 100
+      }
+    }
+  }
+}

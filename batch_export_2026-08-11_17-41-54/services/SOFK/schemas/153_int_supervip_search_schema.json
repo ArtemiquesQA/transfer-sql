@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": [
+    "list"
+  ],
+  "properties": {
+    "list": {
+      "type": "array",
+      "maxItems": 2147483647,
+      "items": {
+        "type": "object",
+        "required": [
+          "mdmId"
+        ],
+        "properties": {
+          "mdmId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 19
+          }
+        }
+      }
+    }
+  }
+}
