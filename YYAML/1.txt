@@ -1,0 +1,1298 @@
+ПЕРВЫЙ ШАГ 
+
+curl --location --request GET 'https://iftdfg-apc001lk.test.vtb.ru:51000/orders/findMyPageable?page=0&size=16&sort=id,desc' \
+--header 'Accept: application/json, text/plain, */*' \
+--header 'Accept-Language: ru-RU,ru;q=0.9' \
+--header 'Authorization: Basic dnRiNDExMTQ3NzpPenhtcDZiZyEhMXF3ZXp4Yw==' \
+--header 'Cache-Control: no-cache' \
+--header 'Connection: keep-alive' \
+--header 'Cookie: JSESSIONID=4751323441533A2DD820E0496B449C82; JSESSIONID=AF8B09522FD257C18BBBC64E63D091C4' \
+--header 'Origin: https://iftdfg-ngc001lk.test.vtb.ru' \
+--header 'Pragma: no-cache' \
+--header 'Referer: https://iftdfg-ngc001lk.test.vtb.ru/' \
+--header 'Sec-Fetch-Dest: empty' \
+--header 'Sec-Fetch-Mode: cors' \
+--header 'Sec-Fetch-Site: same-site' \
+--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36' \
+--header 'sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "Windows"'
+
+
+
+ПЕРВЫЙ ОТВЕТ :
+
+{
+    "content": [
+        {
+            "id": 696730,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 696730,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "377200250552",
+                        "unk": "405215873",
+                        "DVID": "",
+                        "bqId": "",
+                        "tbId": "",
+                        "SNILS": "51146985588",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "exBMId": "",
+                        "mdmCode": "",
+                        "unk_bco": "429851",
+                        "way4air": "",
+                        "way4old": "",
+                        "way4vtb": "",
+                        "partyUid": "5302100152",
+                        "ac_domain": "master",
+                        "blacklist": "NONE",
+                        "job_phone": "84953775826",
+                        "name_last": "Даниил",
+                        "profileId": "",
+                        "sigmaGfId": "",
+                        "genderCode": "1",
+                        "home_phone": "84959395476",
+                        "id-country": "643",
+                        "name_first": "Ковалев",
+                        "citizenship": "643",
+                        "name_father": "Тихонович",
+                        "bankEmployee": "0",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89334629203",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1994-12-15",
+                        "generate_tbid": "FALSE",
+                        "passport_code": "070-116",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "478147",
+                        "passport_series": "1020",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "922623",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2021",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-08 15:10:04",
+                    "endedAt": "2026-06-08 15:10:07",
+                    "orderId": 696730,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-08 15:10:04",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 696217,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 696217,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "177157741536",
+                        "unk": "405215331",
+                        "DVID": "",
+                        "bqId": "",
+                        "tbId": "",
+                        "SNILS": "51146985588",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "exBMId": "",
+                        "mdmCode": "",
+                        "unk_bco": "429571",
+                        "way4air": "",
+                        "way4old": "",
+                        "way4vtb": "",
+                        "partyUid": "5302099133",
+                        "ac_domain": "master",
+                        "blacklist": "NONE",
+                        "job_phone": "84954052640",
+                        "name_last": "Станислав",
+                        "profileId": "",
+                        "sigmaGfId": "",
+                        "genderCode": "1",
+                        "home_phone": "84957225015",
+                        "id-country": "643",
+                        "name_first": "Мельников",
+                        "citizenship": "643",
+                        "name_father": "Егорович",
+                        "bankEmployee": "0",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89683651796",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1961-10-21",
+                        "generate_tbid": "FALSE",
+                        "passport_code": "014-108",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "057467",
+                        "passport_series": "6237",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "379196",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2021",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-05 22:44:02",
+                    "endedAt": "2026-06-05 22:44:04",
+                    "orderId": 696217,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-05 22:44:02",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 696216,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 696216,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "847371855535",
+                        "unk": "405215330",
+                        "DVID": "",
+                        "bqId": "",
+                        "tbId": "",
+                        "SNILS": "51146985588",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "exBMId": "",
+                        "mdmCode": "",
+                        "unk_bco": "429570",
+                        "way4air": "",
+                        "way4old": "",
+                        "way4vtb": "",
+                        "partyUid": "5302099132",
+                        "ac_domain": "master",
+                        "blacklist": "NONE",
+                        "job_phone": "84958943098",
+                        "name_last": "Варлам",
+                        "profileId": "",
+                        "sigmaGfId": "",
+                        "genderCode": "1",
+                        "home_phone": "84959897523",
+                        "id-country": "643",
+                        "name_first": "Богданов",
+                        "citizenship": "643",
+                        "name_father": "Сергеевич",
+                        "bankEmployee": "0",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89436683357",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1987-04-22",
+                        "generate_tbid": "FALSE",
+                        "passport_code": "400-035",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "996734",
+                        "passport_series": "9018",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "013984",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2021",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-05 22:40:21",
+                    "endedAt": "2026-06-05 22:40:23",
+                    "orderId": 696216,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-05 22:40:21",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 695958,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 695958,
+                        "seq": 0
+                    },
+                    "data": {
+                        "MDMID": "5302098879",
+                        "result": "ACTIVATED",
+                        "package": "PRIME2"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "package_link",
+                    "operationId": null,
+                    "startedAt": "2026-06-05 13:20:53",
+                    "endedAt": "2026-06-05 13:20:54",
+                    "orderId": 695958,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-05 13:20:53",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 695957,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 695957,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "857723168668",
+                        "unk": "405215156",
+                        "DVID": "",
+                        "bqId": "",
+                        "tbId": "",
+                        "SNILS": "79634483766",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "exBMId": "",
+                        "mdmCode": "",
+                        "unk_bco": "429369",
+                        "way4air": "",
+                        "way4old": "",
+                        "way4vtb": "",
+                        "partyUid": "5302098879",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Шарапов",
+                        "profileId": "",
+                        "sigmaGfId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Домна",
+                        "citizenship": "643",
+                        "name_father": "Григорьевич",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89180336482",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1966-02-03",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "819375",
+                        "passport_series": "4694",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-05 13:20:26",
+                    "endedAt": "2026-06-05 13:20:28",
+                    "orderId": 695957,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-05 13:20:26",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 694431,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 694431,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "115388457016",
+                        "unk": "405093737",
+                        "bqId": "",
+                        "SNILS": "64221309046",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "5302096652",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Блохин",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Владилена",
+                        "citizenship": "643",
+                        "name_father": "Богданович",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89142997806",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1994-02-03",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "639951",
+                        "passport_series": "3565",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка подключения к АЦ: IOException thrown from InvokeScriptedProcessor[id=b4991b4f-3b6d-1c3d-6784-8c64fa11451f]: javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-03 12:33:08",
+                    "endedAt": "2026-06-03 12:33:10",
+                    "orderId": 694431,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-03 12:33:08",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 694428,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 694428,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "078468349708",
+                        "unk": "405093733",
+                        "bqId": "",
+                        "SNILS": "53356705188",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "5302096650",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Сазонов",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Велимир",
+                        "citizenship": "643",
+                        "name_father": "Андреевич",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89168037031",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1977-02-01",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "927215",
+                        "passport_series": "7881",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка подключения к АЦ: IOException thrown from InvokeScriptedProcessor[id=b4991b4f-3b6d-1c3d-6784-8c64fa11451f]: javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-03 12:31:40",
+                    "endedAt": "2026-06-03 12:31:42",
+                    "orderId": 694428,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-03 12:31:40",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 694427,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 694427,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "283315550578",
+                        "unk": "405093732",
+                        "bqId": "",
+                        "SNILS": "58866722673",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "5302096649",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Гурьев",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Виталий",
+                        "name_father": "Ильич",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89179336254",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1984-02-02",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "032008",
+                        "passport_series": "0400",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка подключения к АЦ: IOException thrown from InvokeScriptedProcessor[id=b4991b4f-3b6d-1c3d-6784-8c64fa11451f]: javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-03 12:31:05",
+                    "endedAt": "2026-06-03 12:31:07",
+                    "orderId": 694427,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-03 12:31:05",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 694425,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 694425,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "543962638337",
+                        "unk": "",
+                        "bqId": "",
+                        "SNILS": "78954055366",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Иванов",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Петр",
+                        "name_father": "Олегович",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89185114725",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1967-02-03",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "090033",
+                        "passport_series": "1212",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка создания записи в карточке ФЛ. Подробности смотрите в логе.",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-03 12:30:51",
+                    "endedAt": "2026-06-03 12:30:52",
+                    "orderId": 694425,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-03 12:30:51",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 694017,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 694017,
+                        "seq": 0
+                    },
+                    "data": {
+                        "MDMID": "5301123350",
+                        "result": "ACTIVATED",
+                        "package": "PRIME2"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "package_link",
+                    "operationId": null,
+                    "startedAt": "2026-06-02 17:39:20",
+                    "endedAt": "2026-06-02 17:39:20",
+                    "orderId": 694017,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-02 17:39:20",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 694015,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 694015,
+                        "seq": 0
+                    },
+                    "data": {
+                        "MDMID": "5301123356",
+                        "result": "ACTIVATED",
+                        "package": "PRIME2"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "package_link",
+                    "operationId": null,
+                    "startedAt": "2026-06-02 17:39:10",
+                    "endedAt": "2026-06-02 17:39:11",
+                    "orderId": 694015,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-02 17:39:10",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 693994,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 693994,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "329545750898",
+                        "unk": "405093266",
+                        "bqId": "",
+                        "SNILS": "31034811918",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "5302095763",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Беляков",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Лавр",
+                        "name_father": "Григорьевна",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89169774945",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1995-02-01",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "760678",
+                        "passport_series": "5490",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка подключения к АЦ: IOException thrown from InvokeScriptedProcessor[id=b4991b4f-3b6d-1c3d-6784-8c64fa11451f]: javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-02 17:19:52",
+                    "endedAt": "2026-06-02 17:19:53",
+                    "orderId": 693994,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-02 17:19:52",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 693993,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 693993,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "460987770050",
+                        "unk": "405093265",
+                        "bqId": "",
+                        "SNILS": "41402629332",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "5302095762",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Филиппов",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Вацлав",
+                        "name_father": "Евгеньевна",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89150403205",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1969-01-01",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "132744",
+                        "passport_series": "7084",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка подключения к АЦ: IOException thrown from InvokeScriptedProcessor[id=b4991b4f-3b6d-1c3d-6784-8c64fa11451f]: javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-02 17:19:22",
+                    "endedAt": "2026-06-02 17:19:23",
+                    "orderId": 693993,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-02 17:19:22",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 693992,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 693992,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "460987770050",
+                        "unk": "405093264",
+                        "bqId": "",
+                        "SNILS": "41402629332",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "mdmCode": "",
+                        "partyUid": "5302095762",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Филиппов",
+                        "profileId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Вацлав",
+                        "name_father": "Евгеньевна",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89150403205",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1969-01-01",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "TRUE",
+                        "passport_number": "132744",
+                        "passport_series": "7084",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "FAIL",
+                    "error": "Ошибка подключения к АЦ: IOException thrown from InvokeScriptedProcessor[id=b4991b4f-3b6d-1c3d-6784-8c64fa11451f]: javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure",
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-06-02 17:19:06",
+                    "endedAt": "2026-06-02 17:19:07",
+                    "orderId": 693992,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "FAIL",
+            "currentTask": 0,
+            "created": "2026-06-02 17:19:06",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 693937,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 693937,
+                        "seq": 0
+                    },
+                    "data": {
+                        "MDMID": "5302090987",
+                        "result": "ACTIVATED",
+                        "package": "PRIME2"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "package_link",
+                    "operationId": null,
+                    "startedAt": "2026-06-02 17:12:24",
+                    "endedAt": "2026-06-02 17:12:25",
+                    "orderId": 693937,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-06-02 17:12:24",
+            "startedBy": "VTB4111477"
+        },
+        {
+            "id": 691553,
+            "tasks": [
+                {
+                    "taskId": {
+                        "orderId": 691553,
+                        "seq": 0
+                    },
+                    "data": {
+                        "VIP": "N",
+                        "inn": "877958949091",
+                        "unk": "405030430",
+                        "DVID": "",
+                        "bqId": "",
+                        "tbId": "",
+                        "SNILS": "11587199891",
+                        "efrId": "",
+                        "email": "usemail@gmail.com",
+                        "wayId": "",
+                        "exBMId": "",
+                        "mdmCode": "",
+                        "unk_bco": "",
+                        "way4air": "",
+                        "way4old": "",
+                        "way4vtb": "",
+                        "partyUid": "5302090987",
+                        "ac_domain": "guest",
+                        "blacklist": "NONE",
+                        "job_phone": "84951112233",
+                        "name_last": "Марков",
+                        "profileId": "",
+                        "sigmaGfId": "",
+                        "genderCode": "1",
+                        "home_phone": "84951234567",
+                        "id-country": "643",
+                        "name_first": "Парамон",
+                        "name_father": "Робертовна",
+                        "bankEmployee": "0",
+                        "createInExBM": "FALSE",
+                        "createInLSGF": "FALSE",
+                        "mobile_phone": "89149402311",
+                        "rezidentFlag": "true",
+                        "date_birthday": "1977-04-18",
+                        "passport_code": "077-885",
+                        "segment_light": "N",
+                        "place_birthday": "Москва",
+                        "createInWAY4AIR": "FALSE",
+                        "createInWAY4OLD": "FALSE",
+                        "createInWAY4VTB": "FALSE",
+                        "create_ac20_bco": "FALSE",
+                        "passport_number": "174006",
+                        "passport_series": "8763",
+                        "registration_city": "Москва",
+                        "registration_flat": "15",
+                        "identificationType": "1",
+                        "registration_house": "13",
+                        "registration_index": "309765",
+                        "masterAccountNumber": "",
+                        "registration_street": "Лубянка",
+                        "retail_service_flag": "N",
+                        "identity_document_type": "21",
+                        "passport_date_delivery": "01.10.2022",
+                        "passport_place_delivery": "ФМС России",
+                        "identificationStatusLSGF": "FULL"
+                    },
+                    "status": "SUCCESS",
+                    "error": null,
+                    "entityId": "client",
+                    "operationId": null,
+                    "startedAt": "2026-05-28 15:41:11",
+                    "endedAt": "2026-05-28 15:41:12",
+                    "orderId": 691553,
+                    "seq": 0
+                }
+            ],
+            "contour": {
+                "id": "IFT",
+                "name": "ИФТ"
+            },
+            "status": "SUCCESS",
+            "currentTask": 0,
+            "created": "2026-05-28 15:41:11",
+            "startedBy": "VTB4111477"
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": true,
+            "unsorted": false,
+            "empty": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 16,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalElements": 428666,
+    "totalPages": 26792,
+    "number": 0,
+    "sort": {
+        "sorted": true,
+        "unsorted": false,
+        "empty": false
+    },
+    "size": 16,
+    "first": true,
+    "numberOfElements": 16,
+    "empty": false
+}
+
+Set-Cookie: JSESSIONID=F4C67ADF08CAC79EC15366310511116D; Path=/; Secure; HttpOnly
+
+
+
+2 шаг:
+
+
+curl --location --request POST 'https://iftdfg-apc001lk.test.vtb.ru:51000/orders' \
+--header 'Accept: application/json, text/plain, */*' \
+--header 'Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7' \
+--header 'Authorization: Basic dnRiNDExMTQ3NzpPenhtcDZiZyEhMXFxd3dlZQ==' \
+--header 'Connection: keep-alive' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=4751323441533A2DD820E0496B449C82; JSESSIONID=AF8B09522FD257C18BBBC64E63D091C4' \
+--header 'Origin: https://iftdfg-ngc001lk.test.vtb.ru' \
+--header 'Referer: https://iftdfg-ngc001lk.test.vtb.ru/' \
+--header 'Sec-Fetch-Dest: empty' \
+--header 'Sec-Fetch-Mode: cors' \
+--header 'Sec-Fetch-Site: same-site' \
+--header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36' \
+--header 'sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "Windows"' \
+--data-raw '{
+  "contour": {
+    "id": "IFT",
+    "name": "ИФТ"
+  },
+  "tasks": [
+    {
+      "entityId": "client",
+      "data": {
+        "name_last": "{{lastName}}",
+        "name_first": "{{firstName}}",
+        "name_father": "{{middleName}}",
+        "date_birthday": "{{dateBirthday}}",
+
+        "identity_document_type": "21",
+        "passport_number": "{{passportNumber}}",
+        "passport_series": "{{passportSeries}}",
+        "passport_place_delivery": "ФМС России",
+        "passport_code": "{{passportCode}}",
+        "passport_date_delivery": "01.10.2021",
+
+        "inn": "{{inn}}",
+        "SNILS": "51146985588",
+
+        "id-country": "643",
+        "citizenship": "643",
+
+        "registration_city": "Москва",
+        "registration_street": "Лубянка",
+        "registration_house": "13",
+        "registration_flat": "15",
+        "place_birthday": "Москва",
+        "registration_index": "{{registrationIndex}}",
+
+        "email": "usemail@gmail.com",
+        "mobile_phone": "{{mobilePhone}}",
+        "job_phone": "{{jobPhone}}",
+        "home_phone": "{{homePhone}}",
+
+        "blacklist": "NONE",
+        "identificationType": "1",
+        "segment_light": "N",
+        "VIP": "N",
+        "retail_service_flag": "N",
+
+        "ac_domain": "master",
+        "create_ac20_bco": "TRUE",
+        "generate_tbid": "FALSE",
+        "identificationStatusLSGF": "FULL",
+        
+        "createInWAY4VTB": "FALSE",
+        "createInWAY4AIR": "FALSE",
+        "createInLSGF": "FALSE",
+        "createInWAY4OLD": "FALSE",
+
+        "bankEmployee": "0",
+        "rezidentFlag": "true",
+        "genderCode": "1"
+      }
+    }
+  ]
+}'
+
+
+2 ОТВЕТ :
+{
+    "id": 696730,
+    "tasks": [
+        {
+            "taskId": {
+                "orderId": 696730,
+                "seq": 0
+            },
+            "data": {
+                "name_last": "Даниил",
+                "name_first": "Ковалев",
+                "name_father": "Тихонович",
+                "date_birthday": "1994-12-15",
+                "identity_document_type": "21",
+                "passport_number": "478147",
+                "passport_series": "1020",
+                "passport_place_delivery": "ФМС России",
+                "passport_code": "070-116",
+                "passport_date_delivery": "01.10.2021",
+                "inn": "377200250552",
+                "SNILS": "51146985588",
+                "id-country": "643",
+                "citizenship": "643",
+                "registration_city": "Москва",
+                "registration_street": "Лубянка",
+                "registration_house": "13",
+                "registration_flat": "15",
+                "place_birthday": "Москва",
+                "registration_index": "922623",
+                "email": "usemail@gmail.com",
+                "mobile_phone": "89334629203",
+                "job_phone": "84953775826",
+                "home_phone": "84959395476",
+                "blacklist": "NONE",
+                "identificationType": "1",
+                "segment_light": "N",
+                "VIP": "N",
+                "retail_service_flag": "N",
+                "ac_domain": "master",
+                "create_ac20_bco": "TRUE",
+                "generate_tbid": "FALSE",
+                "identificationStatusLSGF": "FULL",
+                "createInWAY4VTB": "FALSE",
+                "createInWAY4AIR": "FALSE",
+                "createInLSGF": "FALSE",
+                "createInWAY4OLD": "FALSE",
+                "bankEmployee": "0",
+                "rezidentFlag": "true",
+                "genderCode": "1"
+            },
+            "status": "RUNNING",
+            "error": null,
+            "entityId": "client",
+            "operationId": null,
+            "startedAt": "2026-06-08 15:10:04",
+            "endedAt": null,
+            "orderId": 696730,
+            "seq": 0
+        }
+    ],
+    "contour": {
+        "id": "IFT",
+        "name": "ИФТ"
+    },
+    "status": "READY",
+    "currentTask": 0,
+    "created": "2026-06-08 15:10:04",
+    "startedBy": "VTB4111477"
+}
+
