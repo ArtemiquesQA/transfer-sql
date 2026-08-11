@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: 1447.tbcv-getInnByMdmId-s-rest-v1
+  version: 1.0.0
+  contact:
+    name: Кочегарова Оксана Сергеевна
+    email: okochegarova@vtb.ru
+    url: https://www.vtb.ru
+  description: Методы и модели для работы с API СОФК
+servers:
+  - url: https://vip-prime-sofk.apps.ds1-genr01.corp.dev.vtb/v1
+    description: DSO
+  - url: https://tbcv-vip-prime-sofk.ift01.tbcv.test.vtb.ru/v1
+    description: IFT
+  - url: https://tbcv-vip-prime-sofk.rr01.tbcv.test.vtb.ru/v1
+    description: PREPROD
+  - url: https://tbcv-vip-prime-sofk.tbcv.region.vtb.ru/v1
+    description: PROD
+tags:
+  - name: inn-controller
+    description: Метод работы со списком организаций клиента
+paths:
+  /ext/inn/{mdmId}:
+    get:
+      description: Получить список организаций у клиента
+      operationId: get_inn_by_customer
+      tags:
+        - inn-controller
+      parameters:
+        - name: Initiator-Service
+          in: header
+          required: false
+          description: Имя сервиса запрашивающий данные
+          schema:
+            type: string
+            maxLength: 20
+        - name: mdmId
+          in: path
+          required: true
+          description: Идентификатор клиента
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 40
+      responses:
+        '200':
+          description: Организации
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InnCustomerExt'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        '404':
+          description: Клиент не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SofkErrorDto'
+components:
+  schemas:
+    InnCustomerExt:
+      type: object
+      description: Описание организации клиента
+      additionalProperties: false
+      required:
+        - inn
+      properties:
+        inn:
+          type: string
+          description: ИНН организации
+          maxLength: 12
+          example: '1401382340'
+        name:
+          type: string
+          description: Наименование организации
+          maxLength: 512
+          example: Атол
+        clientPosition:
+          type: string
+          description: Должность клиента в организации
+          maxLength: 255
+          example: Менеджер
+        clientType:
+          type: string
+          maxLength: 255
+          description: Тип клиента
+        hasSalaryProject:
+          type: boolean
+          description: Наличие зарплатного проекта
+        isMain:
+          type: boolean
+          description: Является основной организацией клиента
+        segment:
+          type: string
+          description: Сегмент клиента
+          maxLength: 255
+    SofkErrorDto:
+      type: object
+      description: Ошибки при выполнении запроса
+      additionalProperties: false
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Время ответа
+        status:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          description: Код ответа
+        error:
+          type: string
+          maxLength: 255
+          description: Причина ошибки
+        message:
+          type: string
+          maxLength: 255
+          description: Сообщение ошибки
+        path:
+          type: string
+          description: URN ответа
+          maxLength: 100
+          example: ext/inn/12342123
